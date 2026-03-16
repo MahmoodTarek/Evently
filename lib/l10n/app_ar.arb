@@ -1,0 +1,76 @@
+{
+  "language": "اللغة",
+  "language_ar": "العربية",
+  "language_en": "الإنجليزية",
+
+  "theme": "المظهر",
+  "dark_mode": "الوضع الداكن",
+
+  "common_skip": "تخطي",
+  "common_start": "يلا نبدأ",
+  "common_get_started": "ابدأ",
+  "common_next": "التالي",
+  "common_or": "أو",
+
+  "onboarding_personalize_title": "خصص تجربتك",
+  "onboarding_personalize_description": "اختار اللغة والمظهر اللي يناسبك علشان تبدأ تجربة مريحة ومناسبة ليك.",
+
+  "onboarding_discover_events_title": "اكتشف فعاليات تهمك",
+  "onboarding_discover_events_description": "استكشف عالم من الفعاليات اللي تناسب اهتماماتك. سواء كنت بتحب الموسيقى، ورش العمل، المعارض، أو التعرف على ناس جديدة، هتلاقي فعاليات كتير تناسبك.",
+
+  "onboarding_event_planning_title": "تنظيم الفعاليات بقى أسهل",
+  "onboarding_event_planning_description": "خطط لفعالياتك بسهولة باستخدام أدوات بسيطة لتنظيم الدعوات، متابعة الحضور، وتحديد المواعيد.",
+
+  "onboarding_social_title": "شارك اللحظات مع أصحابك",
+  "onboarding_social_description": "خلي كل فعالية مميزة بمشاركة أصحابك. ابعت دعوات، تابع التفاصيل، وشارك اللحظات الحلوة مع الناس اللي حواليك.",
+
+  "auth_login_title": "سجل دخول لحسابك",
+  "auth_email_hint": "اكتب البريد الإلكتروني",
+  "auth_password_hint": "اكتب كلمة المرور",
+  "auth_forgot_password": "نسيت كلمة المرور؟",
+  "auth_login_button": "تسجيل الدخول",
+  "auth_no_account": "ليس لديك حساب؟",
+  "auth_signup": "إنشاء حساب",
+  "auth_google_login": "تسجيل الدخول بجوجل",
+
+  "auth_signup_title": "أنشئ حسابك",
+  "auth_name_hint": "اكتب اسمك",
+  "auth_confirm_password_hint": "أكد كلمة المرور",
+  "auth_signup_button": "إنشاء حساب",
+  "auth_have_account": "عندك حساب بالفعل؟",
+  "auth_login_here": "سجل دخول",
+  "auth_google_signup": "إنشاء حساب بجوجل",
+
+  "auth_forgot_password_title": "نسيت كلمة المرور",
+  "auth_reset_password": "إعادة تعيين كلمة المرور",
+
+  "home_welcome_back": "أهلاً بعودتك ✨",
+
+  "language_short_en": "EN",
+  "language_short_ar": "AR",
+
+  "category_all": "الكل",
+  "category_sport": "رياضة",
+  "category_birthday": "عيد ميلاد",
+  "category_book_club": "نادي قراءة",
+  "category_exhibition": "معرض",
+
+  "nav_home": "الرئيسية",
+  "nav_favorite": "المفضلة",
+  "nav_profile": "الملف الشخصي",
+
+  "search_event_hint": "ابحث عن فعالية",
+
+  "profile_logout": "تسجيل الخروج",
+
+  "event_title_label": "العنوان",
+  "event_title_hint": "عنوان الفعالية",
+  "event_description_label": "الوصف",
+  "event_description_hint": "اكتب وصف الفعالية...",
+  "event_date_label": "تاريخ الفعالية",
+  "event_date_hint": "اختر التاريخ",
+  "event_time_label": "وقت الفعالية",
+  "event_time_hint": "اختر الوقت",
+  "event_add_button": "إضافة فعالية",
+  "event_details_title": "تفاصيل الفعالية"
+}
