@@ -1,25 +1,23 @@
+import 'package:evently/l10n/app_localizations.dart';
 import 'package:evently/provider/language_provider.dart';
 import 'package:evently/provider/theme_provider.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
-import '../../../l10n/app_localizations.dart';
-
-class Home extends StatefulWidget {
-  const Home({super.key});
+class Profile extends StatefulWidget {
+  const Profile({super.key});
 
   @override
-  State<Home> createState() => _HomeState();
+  State<Profile> createState() => _HomeState();
 }
 
-class _HomeState extends State<Home> {
+class _HomeState extends State<Profile> {
   @override
   Widget build(BuildContext context) {
     var languageProvider = Provider.of<LanguageProvider>(context);
     var themeProvider = Provider.of<ThemeProvider>(context);
     String newLanguage = languageProvider.currentLanguage == 'en' ? 'ar' : 'en';
     return Scaffold(
-      appBar: AppBar(title: Text(AppLocalizations.of(context)!.language)),
       body: Padding(
         padding: const EdgeInsets.symmetric(horizontal: 24),
         child: Column(
