@@ -185,4 +185,13 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get event_details_title => 'Event details';
+
+  @override
+  String get home_tab => 'Home';
+
+  @override
+  String get favorite_tab => 'Favorite';
+
+  @override
+  String get profile_tab => 'Profile';
 }

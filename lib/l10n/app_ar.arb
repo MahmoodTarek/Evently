@@ -72,5 +72,9 @@
   "event_time_label": "وقت الفعالية",
   "event_time_hint": "اختر الوقت",
   "event_add_button": "إضافة فعالية",
-  "event_details_title": "تفاصيل الفعالية"
+  "event_details_title": "تفاصيل الفعالية",
+
+  "home_tab" : "الرئيسية",
+  "favorite_tab" : "المفضلة",
+  "profile_tab" : "الحساب"
 }
