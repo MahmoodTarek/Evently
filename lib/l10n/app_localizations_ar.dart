@@ -185,4 +185,13 @@ class AppLocalizationsAr extends AppLocalizations {
 
   @override
   String get event_details_title => 'تفاصيل الفعالية';
+
+  @override
+  String get home_tab => 'الرئيسية';
+
+  @override
+  String get favorite_tab => 'المفضلة';
+
+  @override
+  String get profile_tab => 'الحساب';
 }

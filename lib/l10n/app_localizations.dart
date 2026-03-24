@@ -445,6 +445,24 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Event details'**
   String get event_details_title;
+
+  /// No description provided for @home_tab.
+  ///
+  /// In en, this message translates to:
+  /// **'Home'**
+  String get home_tab;
+
+  /// No description provided for @favorite_tab.
+  ///
+  /// In en, this message translates to:
+  /// **'Favorite'**
+  String get favorite_tab;
+
+  /// No description provided for @profile_tab.
+  ///
+  /// In en, this message translates to:
+  /// **'Profile'**
+  String get profile_tab;
 }
 
 class _AppLocalizationsDelegate
