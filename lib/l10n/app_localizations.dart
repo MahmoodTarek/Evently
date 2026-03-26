@@ -128,6 +128,12 @@ abstract class AppLocalizations {
   /// **'Dark mode'**
   String get dark_mode;
 
+  /// No description provided for @light_mode.
+  ///
+  /// In en, this message translates to:
+  /// **'Light mode'**
+  String get light_mode;
+
   /// No description provided for @common_skip.
   ///
   /// In en, this message translates to:
@@ -463,6 +469,24 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Profile'**
   String get profile_tab;
+
+  /// No description provided for @english.
+  ///
+  /// In en, this message translates to:
+  /// **'English'**
+  String get english;
+
+  /// No description provided for @arabic.
+  ///
+  /// In en, this message translates to:
+  /// **'Arabic'**
+  String get arabic;
+
+  /// No description provided for @current_language.
+  ///
+  /// In en, this message translates to:
+  /// **'Current Language'**
+  String get current_language;
 }
 
 class _AppLocalizationsDelegate

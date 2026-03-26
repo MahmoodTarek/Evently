@@ -5,6 +5,7 @@
 
   "theme": "Theme",
   "dark_mode": "Dark mode",
+  "light_mode": "Light mode",
 
   "common_skip": "Skip",
   "common_start": "Let's Start",
@@ -76,5 +77,8 @@
 
   "home_tab" : "Home",
   "favorite_tab" : "Favorite",
-  "profile_tab" : "Profile"
+  "profile_tab": "Profile",
+  "english": "English",
+  "arabic": "Arabic",
+  "current_language": "Current Language"
 }
