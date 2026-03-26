@@ -1,5 +1,6 @@
 // ignore: unused_import
 import 'package:intl/intl.dart' as intl;
+
 import 'app_localizations.dart';
 
 // ignore_for_file: type=lint
@@ -22,6 +23,9 @@ class AppLocalizationsAr extends AppLocalizations {
 
   @override
   String get dark_mode => 'الوضع الداكن';
+
+  @override
+  String get light_mode => 'الوضع الفاتح';
 
   @override
   String get common_skip => 'تخطي';
@@ -194,4 +198,13 @@ class AppLocalizationsAr extends AppLocalizations {
 
   @override
   String get profile_tab => 'الحساب';
+
+  @override
+  String get english => 'انجليزي';
+
+  @override
+  String get arabic => 'عربي';
+
+  @override
+  String get current_language => 'اللغة الحالية';
 }

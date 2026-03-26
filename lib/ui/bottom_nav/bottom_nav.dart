@@ -47,11 +47,13 @@ class _BottomNavState extends State<BottomNav> {
     final bool isDark = themeProvider.currentTheme == ThemeMode.dark;
 
     return Scaffold(
-      body: AnimatedSwitcher(
-        duration: const Duration(milliseconds: 500),
-        switchInCurve: Curves.easeInBack,
-        switchOutCurve: Curves.easeInOutBack,
-        child: tabs[currentIndex],
+      body: SafeArea(
+        child: AnimatedSwitcher(
+          duration: const Duration(milliseconds: 500),
+          switchInCurve: Curves.easeInBack,
+          switchOutCurve: Curves.easeInOutBack,
+          child: tabs[currentIndex],
+        ),
       ),
 
       bottomNavigationBar: AnimatedNotchBottomBar(
@@ -64,6 +66,7 @@ class _BottomNavState extends State<BottomNav> {
         kIconSize: 24,
         kBottomRadius: 32,
         bottomBarHeight: 56,
+        bottomBarWidth: MediaQuery.of(context).size.width,
         elevation: 8,
         shadowElevation: 2,
         textAlign: TextAlign.center,

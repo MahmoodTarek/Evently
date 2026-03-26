@@ -1,9 +1,13 @@
 import 'package:flutter/cupertino.dart';
 
-class LanguageProvider extends ChangeNotifier {
-  String currentLanguage = 'en';
+enum Language { en, ar }
 
-  void changeLanguage({required String newLanguage}) {
+class LanguageProvider extends ChangeNotifier {
+  Language currentLanguage = Language.en;
+
+  bool isArabic() => currentLanguage == Language.ar;
+
+  void changeLanguage(Language newLanguage) {
     if (newLanguage == currentLanguage) return;
     currentLanguage = newLanguage;
     notifyListeners();
