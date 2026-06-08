@@ -35,9 +35,9 @@ class Login extends StatelessWidget {
               ),
               child: Text(
                 AppLocalizations.of(context)!.auth_login_button,
-                style: AppStyles.regular14().copyWith(
-                  color: context.colors.mainText,
-                ),
+                style: AppStyles.regular14(
+                  context: context,
+                ).copyWith(color: context.colors.mainText),
               ),
             ),
           ],

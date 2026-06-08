@@ -15,11 +15,39 @@ abstract class AppIcons {
   static const icLogout = 'assets/icons/ic_logout.svg';
   static const themeMode = 'assets/icons/lottie_theme_mode.json';
   static const icSelectedLanguage = 'assets/icons/ic_selected_language.svg';
-
+  static const icSunLight = 'assets/icons/ic_sun_light.svg';
+  static const icSunDark = 'assets/icons/ic_sun_dark.svg';
+  static const icMoonLight = 'assets/icons/ic_moon_light.svg';
+  static const icMoonDark = 'assets/icons/ic_moon_dark.svg';
+  static const icBackLight = 'assets/icons/ic_back_light.svg';
+  static const icBackDark = 'assets/icons/ic_back_dark.svg';
 }
 
 abstract class AppImages {
   static const placeHolderProfilePic = 'assets/images/profile_place_holder.png';
   static const placeHolderProfilePicDark =
       'assets/images/profile_place_holder_dark.png';
+
+  static const imgOnBoardingEventLight =
+      'assets/images/img_onboarding_events_light.png';
+  static const imgOnBoardingEventDark =
+      'assets/images/img_onboarding_events_dark.png';
+
+  static const imgOnBoardingPersonalLight =
+      'assets/images/img_onboarding_personal_light.png';
+  static const imgOnBoardingPersonalDark =
+      'assets/images/img_onboarding_personal_dark.png';
+
+  static const imgOnBoardingPlanningLight =
+      'assets/images/img_onboarding_planning_light.png';
+  static const imgOnBoardingPlanningDark =
+      'assets/images/img_onboarding_planning_dark.png';
+
+  static const imgOnBoardingSocialLight =
+      'assets/images/img_onboarding_social_light.png';
+  static const imgOnBoardingSocialDark =
+      'assets/images/img_onboarding_social_dark.png';
+
+  static const logoEventlyLight = 'assets/images/logo_evently_light.png';
+  static const logoEventlyDark = 'assets/images/logo_evently_dark.png';
 }
