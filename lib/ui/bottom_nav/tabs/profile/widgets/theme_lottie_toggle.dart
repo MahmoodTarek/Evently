@@ -41,7 +41,7 @@ class _ThemeLottieToggleState extends State<ThemeLottieToggle>
           );
         }
 
-        themeProvider.toggleTheme(
+        themeProvider.changeTheme(
           newThemeMode: isDark ? ThemeMode.light : ThemeMode.dark,
         );
       },

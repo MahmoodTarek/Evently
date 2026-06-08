@@ -68,8 +68,9 @@ class _ProfileState extends State<Profile> {
 
             Text(
               'Email@gmail.com',
-              style: AppStyles.regular14().copyWith(
-                color: context.colors.secText,
+              style: AppStyles.regular14(
+                context: context,
+              ).copyWithcolor: context.colors.secText,
               ),
             ),
 
