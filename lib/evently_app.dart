@@ -11,7 +11,9 @@ import 'package:provider/provider.dart';
 import 'l10n/app_localizations.dart';
 
 class EventlyApp extends StatelessWidget {
-  const EventlyApp({super.key});
+  final bool isFirstLaunch;
+
+  const EventlyApp({super.key, required this.isFirstLaunch});
 
   @override
   Widget build(BuildContext context) {
@@ -27,7 +29,7 @@ class EventlyApp extends StatelessWidget {
       theme: AppTheme.lightTheme,
       darkTheme: AppTheme.darkTheme,
       themeMode: themeProvider.currentTheme,
-      initialRoute: AppRoutes.onBoarding,
+      initialRoute: isFirstLaunch ? AppRoutes.onBoarding : AppRoutes.bottomNav,
       routes: {
         AppRoutes.bottomNav: (context) => const BottomNav(),
         AppRoutes.login: (context) => const Login(),

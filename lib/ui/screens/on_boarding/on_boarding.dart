@@ -1,3 +1,4 @@
+import 'package:evently/app_launch_service.dart';
 import 'package:evently/data/onboarding_data_source.dart';
 import 'package:evently/l10n/app_localizations.dart';
 import 'package:evently/ui/screens/on_boarding/widgets/on_boarding_appbar.dart';
@@ -105,9 +106,9 @@ class _OnBoardingState extends State<OnBoarding> {
                   ),
                   onPressed: () {
                     if (isLastPage) {
-                      Navigator.of(
-                        context,
-                      ).pushReplacementNamed(AppRoutes.login);
+                      AppLaunchService.setFirstLaunch();
+                      Navigator.of(context).pushReplacementNamed(
+                          AppRoutes.login);
                       return;
                     }
 
