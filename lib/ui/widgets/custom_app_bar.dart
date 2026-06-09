@@ -1,3 +1,5 @@
+import 'package:evently/utils/app_theme_extension.dart';
+import 'package:evently/utils/resources/app_styles.dart';
 import 'package:flutter/material.dart';
 
 class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
@@ -30,7 +32,16 @@ class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
       elevation: 0,
       centerTitle: centerTitle,
       leading: leading,
-      title: titleWidget ?? (title != null ? Text(title!) : null),
+      title:
+          titleWidget ??
+          (title != null
+              ? Text(
+                  title!,
+                  style: AppStyles.medium18(
+                    context: context,
+                  ).copyWith(color: context.colors.mainText),
+                )
+              : null),
       actions: actions,
     );
   }

@@ -25,7 +25,12 @@ class SelectedRow extends StatelessWidget {
     return Row(
       mainAxisAlignment: MainAxisAlignment.spaceBetween,
       children: [
-        Text(title, style: AppStyles.medium18MainColor(context: context)),
+        Text(
+          title,
+          style: AppStyles.medium18(
+            context: context,
+          ).copyWith(color: context.colors.mainColor),
+        ),
         Row(
           children: options
               .map((option) => _buildItem(context, option))

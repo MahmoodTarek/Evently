@@ -83,7 +83,7 @@ class Login extends StatelessWidget {
                     text: AppLocalizations.of(context)!.auth_forgot_password,
                     textStyle: AppStyles.semiBold14(context: context),
                     onPressed: () {
-                      // TODO: Forgot password button
+                      Navigator.of(context).pushNamed(AppRoutes.forgotPassword);
                     },
                   ),
                 ),
