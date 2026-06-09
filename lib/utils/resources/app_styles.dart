@@ -35,12 +35,8 @@ abstract class AppStyles {
   static TextStyle medium16({required BuildContext context}) =>
       GoogleFonts.poppins(fontSize: 16, fontWeight: FontWeight.w500);
 
-  static TextStyle medium18MainColor({required BuildContext context}) =>
-      GoogleFonts.poppins(
-        fontSize: 18,
-        fontWeight: FontWeight.w500,
-        color: context.colors.mainColor,
-      );
+  static TextStyle medium18({required BuildContext context}) =>
+      GoogleFonts.poppins(fontSize: 18, fontWeight: FontWeight.w500);
 
   static TextStyle medium20({required BuildContext context}) =>
       GoogleFonts.poppins(

@@ -57,4 +57,9 @@ abstract class AppImages {
   static const logoEventlyLight = 'assets/images/logo_evently_light.png';
   static const logoEventlyDark = 'assets/images/logo_evently_dark.png';
   static const logoGoogle = 'assets/images/logo_google.png';
+
+  static const imgLightForgetPassword =
+      'assets/images/img_light_forget_password.png';
+  static const imgDarkForgetPassword =
+      'assets/images/img_dark_forget_password.png';
 }
