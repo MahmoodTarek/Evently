@@ -38,7 +38,7 @@ class LanguageItem extends StatelessWidget {
         child: Row(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
-            Text(title, style: AppStyles.medium16()),
+            Text(title, style: AppStyles.medium16(context: context)),
             if (isSelected)
               SvgPicture.asset(
                 AppIcons.icSelectedLanguage,

@@ -1,7 +1,7 @@
 import 'package:evently/app_launch_service.dart';
 import 'package:evently/data/onboarding_data_source.dart';
 import 'package:evently/l10n/app_localizations.dart';
-import 'package:evently/ui/screens/on_boarding/widgets/on_boarding_appbar.dart';
+import 'package:evently/ui/screens/on_boarding/widgets/onboarding_appbar.dart';
 import 'package:evently/ui/screens/on_boarding/widgets/onboarding_page_view.dart';
 import 'package:evently/utils/app_theme_extension.dart';
 import 'package:evently/utils/resources/app_routes.dart';
@@ -60,10 +60,12 @@ class _OnBoardingState extends State<OnBoarding> {
     final isLastPage = _currentPage == pagesData.length - 1;
 
     return Scaffold(
-      appBar: OnBoardingAppBar(
+      appBar: OnboardingAppbar(
         currentPage: _currentPage,
-        onBack: _goToPreviousPage,
-        onSkip: () => _skipToLastPage(pagesData.length - 1),
+        controller: _controller,
+        pagesData: pagesData,
+        goToPreviousPage: _goToPreviousPage,
+        skipToLastPage: _skipToLastPage,
       ),
       body: SafeArea(
         top: false,
@@ -107,8 +109,9 @@ class _OnBoardingState extends State<OnBoarding> {
                   onPressed: () {
                     if (isLastPage) {
                       AppLaunchService.setFirstLaunch();
-                      Navigator.of(context).pushReplacementNamed(
-                          AppRoutes.login);
+                      Navigator.of(
+                        context,
+                      ).pushReplacementNamed(AppRoutes.login);
                       return;
                     }
 

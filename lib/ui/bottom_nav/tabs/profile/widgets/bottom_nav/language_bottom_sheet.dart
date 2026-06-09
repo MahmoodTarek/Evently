@@ -28,13 +28,13 @@ class LanguageBottomSheet extends StatelessWidget {
             children: [
               Text(
                 appLocalizations.current_language,
-                style: AppStyles.medium16(),
+                style: AppStyles.medium16(context: context),
               ),
               Text(
                 languageProvider.currentLanguage == Language.en
                     ? appLocalizations.english
                     : appLocalizations.arabic,
-                style: AppStyles.medium16(),
+                style: AppStyles.medium16(context: context),
               ),
             ],
           ),
