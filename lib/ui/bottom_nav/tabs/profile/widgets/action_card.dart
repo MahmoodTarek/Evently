@@ -32,8 +32,7 @@ class ActionCard extends StatelessWidget {
             title,
             style: AppStyles.medium16(
               context: context,
-            ).copyWithcolor: context.colors.mainText,
-            ),
+            ).copyWith(color: context.colors.mainText),
           ),
           actionIcon,
         ],
