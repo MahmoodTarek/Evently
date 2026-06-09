@@ -11,8 +11,8 @@ import 'package:evently/utils/resources/app_styles.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 
-class Login extends StatelessWidget {
-  const Login({super.key});
+class Register extends StatelessWidget {
+  const Register({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -35,11 +35,27 @@ class Login extends StatelessWidget {
               children: [
                 const SizedBox(height: 16),
                 Text(
-                  AppLocalizations.of(context)!.auth_login_title,
+                  AppLocalizations.of(context)!.auth_signup_title,
                   style: AppStyles.semiBold24(context: context),
                 ),
-
                 const SizedBox(height: 24),
+                CustomFormField(
+                  hintText: AppLocalizations.of(context)!.auth_name_hint,
+                  prefixIcon: Padding(
+                    padding: const EdgeInsets.symmetric(
+                      vertical: 4,
+                      horizontal: 16,
+                    ),
+                    child: SvgPicture.asset(
+                      AppIcons.icPlaceHolderPerson,
+                      height: 24,
+                      width: 24,
+                    ),
+                  ),
+                  keyboardType: TextInputType.emailAddress,
+                ),
+
+                const SizedBox(height: 16),
                 CustomFormField(
                   hintText: AppLocalizations.of(context)!.auth_email_hint,
                   prefixIcon: Padding(
@@ -75,27 +91,35 @@ class Login extends StatelessWidget {
                   icHidePassword: AppIcons.icEyeOn,
                 ),
 
-                const SizedBox(height: 8),
-                Align(
-                  alignment: Alignment.centerRight,
-
-                  child: CustomTextButton(
-                    text: AppLocalizations.of(context)!.auth_forgot_password,
-                    textStyle: AppStyles.semiBold14(context: context),
-                    onPressed: () {
-                      // TODO: Forgot password button
-                    },
+                const SizedBox(height: 16),
+                CustomFormField(
+                  hintText: AppLocalizations.of(
+                    context,
+                  )!.auth_confirm_password_hint,
+                  prefixIcon: Padding(
+                    padding: const EdgeInsets.symmetric(
+                      vertical: 4,
+                      horizontal: 16,
+                    ),
+                    child: SvgPicture.asset(
+                      AppIcons.icPassword,
+                      height: 24,
+                      width: 24,
+                    ),
                   ),
+                  isPassword: true,
+                  icShowPassword: AppIcons.icEyeOff,
+                  icHidePassword: AppIcons.icEyeOn,
                 ),
 
-                const SizedBox(height: 40),
+                const SizedBox(height: 52),
                 CustomElevatedButton(
                   onPressed: () {
-                    // TODO: Login button
+                    // TODO: Signup button
                   },
                   backgroundColor: context.colors.mainColor,
                   child: Text(
-                    AppLocalizations.of(context)!.auth_login_button,
+                    AppLocalizations.of(context)!.auth_signup_button,
                     style: AppStyles.semiBold14(context: context).copyWith(
                       color: context.isDark
                           ? context.colors.mainText
@@ -105,29 +129,30 @@ class Login extends StatelessWidget {
                 ),
 
                 const SizedBox(height: 48),
+
                 Row(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
                     Text(
-                      AppLocalizations.of(context)!.auth_no_account,
+                      AppLocalizations.of(context)!.auth_have_account,
                       style: AppStyles.regular14(
                         context: context,
                       ).copyWith(color: context.colors.secText),
                     ),
-
                     CustomTextButton(
-                      text: AppLocalizations.of(context)!.auth_signup,
+                      text: AppLocalizations.of(context)!.auth_login_button,
                       textStyle: AppStyles.semiBold14(context: context),
                       onPressed: () {
                         Navigator.of(
                           context,
-                        ).pushReplacementNamed(AppRoutes.register);
+                        ).pushReplacementNamed(AppRoutes.login);
                       },
                     ),
                   ],
                 ),
 
                 const SizedBox(height: 24),
+
                 CustomTextDivider(
                   text: AppLocalizations.of(context)!.common_or,
                   color: context.colors.mainColor,
@@ -146,12 +171,13 @@ class Login extends StatelessWidget {
                       Image.asset(AppImages.logoGoogle, height: 24, width: 24),
                       const SizedBox(width: 16),
                       Text(
-                        AppLocalizations.of(context)!.auth_google_login,
+                        AppLocalizations.of(context)!.auth_google_signup,
                         style: AppStyles.semiBold14(context: context),
                       ),
                     ],
                   ),
                 ),
+
                 const SizedBox(height: 24),
               ],
             ),
