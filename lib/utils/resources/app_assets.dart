@@ -26,6 +26,7 @@ abstract class AppIcons {
   static const icPassword = 'assets/icons/ic_password.svg';
   static const icEyeOff = 'assets/icons/ic_eye_off.svg';
   static const icEyeOn = 'assets/icons/ic_eyes_on.svg';
+  static const icPlaceHolderPerson = 'assets/icons/ic_placeholder_person.svg';
 }
 
 abstract class AppImages {
