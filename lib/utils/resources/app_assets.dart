@@ -21,6 +21,11 @@ abstract class AppIcons {
   static const icMoonDark = 'assets/icons/ic_moon_dark.svg';
   static const icBackLight = 'assets/icons/ic_back_light.svg';
   static const icBackDark = 'assets/icons/ic_back_dark.svg';
+
+  static const icEmail = 'assets/icons/ic_email.svg';
+  static const icPassword = 'assets/icons/ic_password.svg';
+  static const icEyeOff = 'assets/icons/ic_eye_off.svg';
+  static const icEyeOn = 'assets/icons/ic_eyes_on.svg';
 }
 
 abstract class AppImages {
@@ -50,4 +55,5 @@ abstract class AppImages {
 
   static const logoEventlyLight = 'assets/images/logo_evently_light.png';
   static const logoEventlyDark = 'assets/images/logo_evently_dark.png';
+  static const logoGoogle = 'assets/images/logo_google.png';
 }

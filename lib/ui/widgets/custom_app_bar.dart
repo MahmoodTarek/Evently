@@ -1,36 +1,40 @@
 import 'package:flutter/material.dart';
 
 class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
-  final Widget title;
-  final Widget? leading;
-  final bool isCenter;
-  final double? leadingWidth;
-  final EdgeInsets titlePadding;
-  final List<Widget>? actions;
-
   const CustomAppBar({
     super.key,
-    required this.title,
     this.leading,
-    this.isCenter = true,
-    this.leadingWidth,
-    this.titlePadding = const EdgeInsets.only(left: 16),
+    this.title,
+    this.titleWidget,
     this.actions,
+    this.centerTitle = true,
+    this.height = 80,
   });
+
+  final Widget? leading;
+  final String? title;
+  final Widget? titleWidget;
+  final List<Widget>? actions;
+  final bool centerTitle;
+  final double height;
 
   @override
   Widget build(BuildContext context) {
     return AppBar(
-      title: title,
-      leading: Padding(padding: titlePadding, child: leading),
-      actions: actions,
-      centerTitle: isCenter,
-      leadingWidth: leadingWidth,
-      elevation: 0,
+      toolbarHeight: height,
+      leadingWidth: 60,
+      shadowColor: Colors.transparent,
+      titleSpacing: 0,
       backgroundColor: Colors.transparent,
+      surfaceTintColor: Colors.transparent,
+      elevation: 0,
+      centerTitle: centerTitle,
+      leading: leading,
+      title: titleWidget ?? (title != null ? Text(title!) : null),
+      actions: actions,
     );
   }
 
   @override
-  Size get preferredSize => const Size.fromHeight(kToolbarHeight);
+  Size get preferredSize => Size.fromHeight(height);
 }

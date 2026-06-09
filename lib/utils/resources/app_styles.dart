@@ -32,7 +32,7 @@ abstract class AppStyles {
         color: context.colors.secText,
       );
 
-  static TextStyle medium16() =>
+  static TextStyle medium16({required BuildContext context}) =>
       GoogleFonts.poppins(fontSize: 16, fontWeight: FontWeight.w500);
 
   static TextStyle medium18MainColor({required BuildContext context}) =>
@@ -52,5 +52,10 @@ abstract class AppStyles {
   static TextStyle semiBold20() =>
       GoogleFonts.poppins(fontSize: 20, fontWeight: FontWeight.w600);
 
-
+  static TextStyle semiBold24({required BuildContext context}) =>
+      GoogleFonts.poppins(
+        fontSize: 24,
+        fontWeight: FontWeight.w600,
+        color: context.colors.mainColor,
+      );
 }
