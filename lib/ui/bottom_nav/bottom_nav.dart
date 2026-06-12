@@ -4,6 +4,8 @@ import 'package:evently/provider/theme_provider.dart';
 import 'package:evently/ui/bottom_nav/tabs/favorite/favorite.dart';
 import 'package:evently/ui/bottom_nav/tabs/home/home.dart';
 import 'package:evently/ui/bottom_nav/tabs/profile/profile.dart';
+import 'package:evently/ui/widgets/custom_fab.dart';
+import 'package:evently/utils/app_theme_extension.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:provider/provider.dart';
@@ -37,10 +39,8 @@ class _BottomNavState extends State<BottomNav> {
     super.dispose();
   }
 
-
   @override
   Widget build(BuildContext context) {
-
     final appLanguage = AppLocalizations.of(context)!;
     final theme = Theme.of(context);
     final themeProvider = context.watch<ThemeProvider>();
@@ -55,7 +55,14 @@ class _BottomNavState extends State<BottomNav> {
           child: tabs[currentIndex],
         ),
       ),
-
+      floatingActionButton: CustomFAB(
+        backgroundColor: context.colors.mainColor,
+        elevation: 10,
+        radius: 50,
+        radiusColor: context.colors.mainColor,
+        onPressed: () {},
+        child: SvgPicture.asset(AppIcons.icAdd),
+      ),
       bottomNavigationBar: AnimatedNotchBottomBar(
         onTap: (index) {
           setState(() => currentIndex = index);
