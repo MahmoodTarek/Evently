@@ -32,6 +32,8 @@ abstract class AppIcons {
   static const icCategorySport = 'assets/icons/ic_category_sport.svg';
   static const icCategoryBirthday = 'assets/icons/ic_category_birthday.svg';
   static const icCategoryBookClub = 'assets/icons/ic_category_book_club.svg';
+  static const icCategoryExhibition = 'assets/icons/ic_category_exhibition.svg';
+
   static const icAdd = 'assets/icons/ic_add.svg';
 }
 
