@@ -11,13 +11,6 @@ abstract class AppStyles {
     );
   }
 
-  static TextStyle semiBold14({required BuildContext context}) =>
-      GoogleFonts.poppins(
-        fontSize: 14,
-        fontWeight: FontWeight.w600,
-        color: context.colors.mainColor,
-      );
-
   static TextStyle regular14({required BuildContext context}) =>
       GoogleFonts.poppins(
         fontSize: 14,
@@ -32,11 +25,28 @@ abstract class AppStyles {
         color: context.colors.secText,
       );
 
+  static TextStyle medium14({required BuildContext context}) =>
+      GoogleFonts.poppins(fontSize: 14, fontWeight: FontWeight.w500);
+
   static TextStyle medium16({required BuildContext context}) =>
       GoogleFonts.poppins(fontSize: 16, fontWeight: FontWeight.w500);
 
   static TextStyle medium18({required BuildContext context}) =>
       GoogleFonts.poppins(fontSize: 18, fontWeight: FontWeight.w500);
+
+  static TextStyle semiBold14({required BuildContext context}) =>
+      GoogleFonts.poppins(
+        fontSize: 14,
+        fontWeight: FontWeight.w600,
+        color: context.colors.mainColor,
+      );
+
+  static TextStyle semiBold16({required BuildContext context}) =>
+      GoogleFonts.poppins(
+        fontSize: 16,
+        fontWeight: FontWeight.w600,
+        color: context.colors.mainColor,
+      );
 
   static TextStyle medium20({required BuildContext context}) =>
       GoogleFonts.poppins(

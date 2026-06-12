@@ -27,6 +27,12 @@ abstract class AppIcons {
   static const icEyeOff = 'assets/icons/ic_eye_off.svg';
   static const icEyeOn = 'assets/icons/ic_eyes_on.svg';
   static const icPlaceHolderPerson = 'assets/icons/ic_placeholder_person.svg';
+
+  static const icCategoryAll = 'assets/icons/ic_category_all.svg';
+  static const icCategorySport = 'assets/icons/ic_category_sport.svg';
+  static const icCategoryBirthday = 'assets/icons/ic_category_birthday.svg';
+  static const icCategoryBookClub = 'assets/icons/ic_category_book_club.svg';
+  static const icAdd = 'assets/icons/ic_add.svg';
 }
 
 abstract class AppImages {
@@ -62,4 +68,24 @@ abstract class AppImages {
       'assets/images/img_light_forget_password.png';
   static const imgDarkForgetPassword =
       'assets/images/img_dark_forget_password.png';
+
+  static const imgLightCategorySport =
+      'assets/images/img_event_category_sport_light.png';
+  static const imgDarkCategorySport =
+      'assets/images/img_event_category_sport_dark.png';
+
+  static const imgLightCategoryBirthday =
+      'assets/images/img_event_category_birthday_light.png';
+  static const imgDarkCategoryBirthday =
+      'assets/images/img_event_category_birthday_dark.png';
+
+  static const imgLightCategoryBookClub =
+      'assets/images/img_event_category_book_club_light.png';
+  static const imgDarkCategoryBookClub =
+      'assets/images/img_event_category_book_club_dark.png';
+
+  static const imgLightCategoryExhibition =
+      'assets/images/img_event_category_exhibition_light.png';
+  static const imgDarkCategoryExhibition =
+      'assets/images/img_event_category_exhibition_dark.png';
 }
