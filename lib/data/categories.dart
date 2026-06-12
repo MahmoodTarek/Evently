@@ -1,6 +1,7 @@
 import 'package:evently/l10n/app_localizations.dart';
 import 'package:evently/model/category.dart';
 import 'package:evently/utils/resources/app_assets.dart';
+import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 
 List<Category> categories(BuildContext context) {
@@ -27,8 +28,8 @@ List<Category> categories(BuildContext context) {
     ),
     Category(
       id: 3,
-      name: AppLocalizations.of(context)!.category_book_club,
-      image: AppIcons.icCategoryBookClub,
+      name: AppLocalizations.of(context)!.category_exhibition,
+      image: AppIcons.icCategoryExhibition,
     ),
   ];
 }
