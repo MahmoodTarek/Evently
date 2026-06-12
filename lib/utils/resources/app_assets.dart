@@ -35,6 +35,7 @@ abstract class AppIcons {
   static const icCategoryExhibition = 'assets/icons/ic_category_exhibition.svg';
 
   static const icAdd = 'assets/icons/ic_add.svg';
+  static const icSearch = 'assets/icons/ic_search.svg';
 }
 
 abstract class AppImages {

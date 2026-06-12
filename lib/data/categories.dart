@@ -27,7 +27,7 @@ List<Category> categories(BuildContext context) {
       image: AppIcons.icCategoryBookClub,
     ),
     Category(
-      id: 3,
+      id: 4,
       name: AppLocalizations.of(context)!.category_exhibition,
       image: AppIcons.icCategoryExhibition,
     ),
