@@ -6,6 +6,7 @@ import 'package:evently/ui/bottom_nav/tabs/home/home.dart';
 import 'package:evently/ui/bottom_nav/tabs/profile/profile.dart';
 import 'package:evently/ui/widgets/custom_fab.dart';
 import 'package:evently/utils/app_theme_extension.dart';
+import 'package:evently/utils/resources/app_routes.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:provider/provider.dart';
@@ -60,7 +61,9 @@ class _BottomNavState extends State<BottomNav> {
         elevation: 10,
         radius: 50,
         radiusColor: context.colors.mainColor,
-        onPressed: () {},
+        onPressed: () {
+          Navigator.pushNamed(context, AppRoutes.addEvent);
+        },
         child: SvgPicture.asset(AppIcons.icAdd),
       ),
       bottomNavigationBar: AnimatedNotchBottomBar(

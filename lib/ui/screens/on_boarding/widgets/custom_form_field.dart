@@ -20,6 +20,7 @@ class CustomFormField extends StatefulWidget {
   final TextInputType keyboardType;
   final String? icHidePassword;
   final String? icShowPassword;
+  final double? height;
 
   const CustomFormField({
     super.key,
@@ -37,6 +38,7 @@ class CustomFormField extends StatefulWidget {
     this.keyboardType = TextInputType.text,
     this.icHidePassword,
     this.icShowPassword,
+    this.height,
   });
 
   @override
@@ -54,75 +56,77 @@ class _CustomFormFieldState extends State<CustomFormField> {
 
   @override
   Widget build(BuildContext context) {
-    return TextFormField(
-      obscureText: widget.isPassword && isHiddenPassword,
-      keyboardType: widget.keyboardType,
-      autovalidateMode: AutovalidateMode.onUnfocus,
-      controller: widget.controller,
-      style: TextStyle(color: widget.textColor ?? context.colors.mainText),
-      decoration: InputDecoration(
-        prefixIcon: widget.prefixIcon,
+    return SizedBox(
+      height: widget.height,
+      child: TextFormField(
+        obscureText: widget.isPassword && isHiddenPassword,
+        keyboardType: widget.keyboardType,
+        autovalidateMode: AutovalidateMode.onUnfocus,
+        controller: widget.controller,
+        style: TextStyle(color: widget.textColor ?? context.colors.mainText),
+        decoration: InputDecoration(
+          prefixIcon: widget.prefixIcon,
+          suffixIcon: widget.isPassword
+              ? IconButton(
+                  onPressed: () {
+                    setState(() {
+                      isHiddenPassword = !isHiddenPassword;
+                    });
+                  },
+                  icon:
+                      (widget.icHidePassword != null &&
+                          widget.icShowPassword != null)
+                      ? SvgPicture.asset(
+                          isHiddenPassword
+                              ? widget.icShowPassword!
+                              : widget.icHidePassword!,
+                        )
+                      : Icon(
+                          isHiddenPassword
+                              ? Icons.visibility
+                              : Icons.visibility_off,
+                          color: context.colors.mainColor,
+                        ),
+                )
+              : widget.suffixIcon,
 
-        suffixIcon: widget.isPassword
-            ? IconButton(
-                onPressed: () {
-                  setState(() {
-                    isHiddenPassword = !isHiddenPassword;
-                  });
-                },
-                icon:
-                    (widget.icHidePassword != null &&
-                        widget.icShowPassword != null)
-                    ? SvgPicture.asset(
-                        isHiddenPassword
-                            ? widget.icShowPassword!
-                            : widget.icHidePassword!,
-                      )
-                    : Icon(
-                        isHiddenPassword
-                            ? Icons.visibility
-                            : Icons.visibility_off,
-                        color: context.colors.mainColor,
-                      ),
-              )
-            : widget.suffixIcon,
+          hintText: widget.hintText,
 
-        hintText: widget.hintText,
+          hintStyle: widget.hintStyle,
 
-        hintStyle: widget.hintStyle,
+          filled: true,
+          fillColor: context.colors.inputs,
 
-        filled: true,
-        fillColor: context.colors.inputs,
+          border: OutlineInputBorder(
+            borderRadius: BorderRadius.circular(15),
+            borderSide: BorderSide.none,
+          ),
 
-        border: OutlineInputBorder(
-          borderRadius: BorderRadius.circular(15),
-          borderSide: BorderSide.none,
+          enabledBorder: OutlineInputBorder(
+            borderRadius: BorderRadius.circular(15),
+            borderSide: BorderSide.none,
+          ),
+
+          focusedBorder: OutlineInputBorder(
+            borderRadius: BorderRadius.circular(15),
+            borderSide: BorderSide(color: context.colors.mainColor, width: 2),
+          ),
+
+          errorBorder: OutlineInputBorder(
+            borderRadius: BorderRadius.circular(15),
+            borderSide: const BorderSide(color: Colors.red, width: 2),
+          ),
+
+          focusedErrorBorder: OutlineInputBorder(
+            borderRadius: BorderRadius.circular(15),
+            borderSide: const BorderSide(color: Colors.red, width: 2),
+          ),
         ),
-
-        enabledBorder: OutlineInputBorder(
-          borderRadius: BorderRadius.circular(15),
-          borderSide: BorderSide.none,
-        ),
-
-        focusedBorder: OutlineInputBorder(
-          borderRadius: BorderRadius.circular(15),
-          borderSide: BorderSide(color: context.colors.mainColor, width: 2),
-        ),
-
-        errorBorder: OutlineInputBorder(
-          borderRadius: BorderRadius.circular(15),
-          borderSide: const BorderSide(color: Colors.red, width: 2),
-        ),
-
-        focusedErrorBorder: OutlineInputBorder(
-          borderRadius: BorderRadius.circular(15),
-          borderSide: const BorderSide(color: Colors.red, width: 2),
-        ),
+        onChanged: widget.onChanged,
+        validator: widget.validator,
+        maxLines: widget.maxLines,
+        cursorColor: widget.cursorColor,
       ),
-      onChanged: widget.onChanged,
-      validator: widget.validator,
-      maxLines: widget.maxLines,
-      cursorColor: widget.cursorColor,
     );
   }
 }
