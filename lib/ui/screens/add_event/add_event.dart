@@ -8,6 +8,7 @@ import 'package:evently/ui/widgets/custom_selected_items_row.dart';
 import 'package:evently/utils/app_theme_extension.dart';
 import 'package:evently/utils/resources/app_assets.dart';
 import 'package:evently/utils/resources/app_styles.dart';
+import 'package:evently/utils/screen_size.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 
@@ -19,6 +20,9 @@ class AddEvent extends StatefulWidget {
 }
 
 class _AddEventState extends State<AddEvent> {
+  late final double height;
+  late final double width;
+
   String selectedCategory = '';
   String title = '';
   String description = '';
@@ -27,6 +31,8 @@ class _AddEventState extends State<AddEvent> {
 
   @override
   Widget build(BuildContext context) {
+    height = context.height;
+    width = context.width;
     final localization = AppLocalizations.of(context)!;
     return Scaffold(
       appBar: CustomAppBar(
@@ -47,15 +53,15 @@ class _AddEventState extends State<AddEvent> {
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               paddingOrientational(
-                vertical: 16,
-                horizontal: 16,
+                vertical: height * .02,
+                horizontal: width * .02,
                 child: Container(
-                  height: 220,
+                  height: height * .30,
                   decoration: BoxDecoration(
                     borderRadius: BorderRadius.circular(16),
                     image: DecorationImage(
                       image: AssetImage(AppImages.imgDarkCategoryBirthday),
-                      fit: BoxFit.cover,
+                      fit: BoxFit.fill,
                     ),
                   ),
                 ),
@@ -69,7 +75,8 @@ class _AddEventState extends State<AddEvent> {
                 onSelected: (String item) => print(item),
               ),
 
-              const SizedBox(height: 16),
+              SizedBox(height: height * 0.02),
+
               paddingOrientational(
                 child: Text(
                   AppLocalizations.of(context)!.event_title_label,
@@ -77,7 +84,7 @@ class _AddEventState extends State<AddEvent> {
                 ),
               ),
 
-              const SizedBox(height: 8),
+              SizedBox(height: height * 0.01),
               paddingOrientational(
                 child: CustomFormField(
                   hintText: AppLocalizations.of(context)?.event_title_hint,
@@ -87,7 +94,7 @@ class _AddEventState extends State<AddEvent> {
                 ),
               ),
 
-              const SizedBox(height: 16),
+              SizedBox(height: height * 0.02),
               paddingOrientational(
                 child: Text(
                   localization.event_description_label,
@@ -95,7 +102,8 @@ class _AddEventState extends State<AddEvent> {
                 ),
               ),
 
-              const SizedBox(height: 8),
+              SizedBox(height: height * 0.02),
+
               paddingOrientational(
                 child: CustomFormField(
                   hintText: localization.event_title_label,
@@ -105,7 +113,7 @@ class _AddEventState extends State<AddEvent> {
                   maxLines: 5,
                 ),
               ),
-              const SizedBox(height: 16),
+              SizedBox(height: height * 0.02),
 
               paddingOrientational(
                 child: EventDate(
@@ -116,7 +124,7 @@ class _AddEventState extends State<AddEvent> {
               ),
 
               paddingOrientational(
-                vertical: 16,
+                vertical: height * .02,
                 child: EventDate(
                   prefixIcon: AppIcons.icTime,
                   title: localization.event_time_label,
@@ -124,7 +132,7 @@ class _AddEventState extends State<AddEvent> {
                 ),
               ),
 
-              const SizedBox(height: 16),
+              SizedBox(height: height * 0.02),
 
               paddingOrientational(
                 child: CustomElevatedButton(
