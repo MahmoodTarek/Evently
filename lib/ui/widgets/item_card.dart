@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 
 class ItemCard extends StatelessWidget {
-  final String item;
+  final String title;
   final String? icon;
 
   final bool isSelected;
@@ -25,7 +25,7 @@ class ItemCard extends StatelessWidget {
 
   const ItemCard({
     super.key,
-    required this.item,
+    required this.title,
     this.icon,
     this.isSelected = false,
     this.isIconPrefix = true,
@@ -76,7 +76,7 @@ class ItemCard extends StatelessWidget {
               const SizedBox(width: 8),
             ],
 
-            Text(labelBuilder?.call(item) ?? item, style: itemTextStyle),
+            Text(labelBuilder?.call(title) ?? title, style: itemTextStyle),
 
             if (!isIconPrefix && icon != null) ...[
               const SizedBox(width: 8),
