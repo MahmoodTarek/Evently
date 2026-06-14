@@ -46,7 +46,7 @@ class _CustomSelectedItemsRowState<T> extends State<CustomSelectedItemsRow<T>> {
           final item = widget.optionsTitle[index];
 
           return ItemCard(
-            item: item,
+            title: item,
             isSelected: item == selectedItem,
             onTap: () {
               setState(() {

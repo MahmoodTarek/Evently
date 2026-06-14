@@ -56,7 +56,7 @@ class _EventCardState extends State<EventCard> {
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           ItemCard(
-            item: widget.date,
+            title: widget.date,
             backgroundColor: context.colors.background,
             borderColor: context.colors.stroke,
             itemTextStyle: AppStyles.semiBold16(
@@ -65,7 +65,7 @@ class _EventCardState extends State<EventCard> {
           ),
 
           ItemCard(
-            item: widget.title,
+            title: widget.title,
             icon: iconFav,
             isIconPrefix: false,
             width: double.infinity,
