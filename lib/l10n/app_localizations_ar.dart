@@ -1,5 +1,6 @@
 // ignore: unused_import
 import 'package:intl/intl.dart' as intl;
+
 import 'app_localizations.dart';
 
 // ignore_for_file: type=lint
@@ -33,7 +34,7 @@ class AppLocalizationsAr extends AppLocalizations {
   String get common_start => 'يلا نبدأ';
 
   @override
-  String get common_get_started => 'ابدأ';
+  String get common_get_started => 'ابدأ الآن';
 
   @override
   String get common_next => 'التالي';
@@ -46,28 +47,29 @@ class AppLocalizationsAr extends AppLocalizations {
 
   @override
   String get onboarding_personalize_description =>
-      'اختار اللغة والمظهر اللي يناسبك علشان تبدأ تجربة مريحة ومناسبة ليك.';
+      'اختار اللغة والمظهر اللي يناسبوك علشان تبدأ تجربة مريحة ومصممة على ذوقك.';
 
   @override
-  String get onboarding_discover_events_title => 'اكتشف فعاليات تهمك';
+  String get onboarding_discover_events_title =>
+      'اكتشف فعاليات تناسب اهتماماتك';
 
   @override
   String get onboarding_discover_events_description =>
-      'استكشف عالم من الفعاليات اللي تناسب اهتماماتك. سواء كنت بتحب الموسيقى، ورش العمل، المعارض، أو التعرف على ناس جديدة، هتلاقي فعاليات كتير تناسبك.';
+      'ادخل عالم مليان فعاليات متنوعة تناسب اهتماماتك. سواء بتحب الموسيقى، ورش العمل، التعارف المهني، أو تجربة حاجات جديدة، هتلاقي فعاليات مناسبة ليك في كل وقت.';
 
   @override
   String get onboarding_event_planning_title => 'تنظيم الفعاليات بقى أسهل';
 
   @override
   String get onboarding_event_planning_description =>
-      'خطط لفعالياتك بسهولة باستخدام أدوات بسيطة لتنظيم الدعوات، متابعة الحضور، وتحديد المواعيد.';
+      'خطط لأي فعالية بسهولة باستخدام أدوات متكاملة لإدارة الدعوات، متابعة تأكيدات الحضور، وجدولة التذكيرات وتنظيم كل التفاصيل المهمة.';
 
   @override
   String get onboarding_social_title => 'شارك اللحظات مع أصحابك';
 
   @override
   String get onboarding_social_description =>
-      'خلي كل فعالية مميزة بمشاركة أصحابك. ابعت دعوات، تابع التفاصيل، وشارك اللحظات الحلوة مع الناس اللي حواليك.';
+      'خلي كل فعالية ليها طابع مميز بمشاركة أصحابك. ابعت الدعوات، تابع كل التفاصيل، وشارك أجمل اللحظات مع الناس اللي يهموك.';
 
   @override
   String get auth_login_title => 'سجل دخول لحسابك';
@@ -85,13 +87,13 @@ class AppLocalizationsAr extends AppLocalizations {
   String get auth_login_button => 'تسجيل الدخول';
 
   @override
-  String get auth_no_account => 'ليس لديك حساب؟';
+  String get auth_no_account => 'معندكش حساب؟';
 
   @override
   String get auth_signup => 'إنشاء حساب';
 
   @override
-  String get auth_google_login => 'تسجيل الدخول بجوجل';
+  String get auth_google_login => 'تسجيل الدخول باستخدام جوجل';
 
   @override
   String get auth_signup_title => 'أنشئ حسابك';
@@ -112,7 +114,7 @@ class AppLocalizationsAr extends AppLocalizations {
   String get auth_login_here => 'سجل دخول';
 
   @override
-  String get auth_google_signup => 'إنشاء حساب بجوجل';
+  String get auth_google_signup => 'إنشاء حساب باستخدام جوجل';
 
   @override
   String get auth_forgot_password_title => 'نسيت كلمة المرور';
@@ -151,7 +153,7 @@ class AppLocalizationsAr extends AppLocalizations {
   String get nav_favorite => 'المفضلة';
 
   @override
-  String get nav_profile => 'الملف الشخصي';
+  String get nav_profile => 'الحساب';
 
   @override
   String get search_event_hint => 'ابحث عن فعالية';
@@ -163,7 +165,7 @@ class AppLocalizationsAr extends AppLocalizations {
   String get event_title_label => 'العنوان';
 
   @override
-  String get event_title_hint => 'عنوان الفعالية';
+  String get event_title_hint => 'اكتب عنوان الفعالية';
 
   @override
   String get event_description_label => 'الوصف';
@@ -190,6 +192,12 @@ class AppLocalizationsAr extends AppLocalizations {
   String get event_details_title => 'تفاصيل الفعالية';
 
   @override
+  String get event_edit_title => 'تعديل الفعالية';
+
+  @override
+  String get event_update_button => 'تحديث الفعالية';
+
+  @override
   String get home_tab => 'الرئيسية';
 
   @override
@@ -199,10 +207,10 @@ class AppLocalizationsAr extends AppLocalizations {
   String get profile_tab => 'الحساب';
 
   @override
-  String get english => 'انجليزي';
+  String get english => 'English';
 
   @override
-  String get arabic => 'عربي';
+  String get arabic => 'العربية';
 
   @override
   String get current_language => 'اللغة الحالية';
