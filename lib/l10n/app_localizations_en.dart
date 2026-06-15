@@ -1,5 +1,6 @@
 // ignore: unused_import
 import 'package:intl/intl.dart' as intl;
+
 import 'app_localizations.dart';
 
 // ignore_for_file: type=lint
@@ -79,19 +80,19 @@ class AppLocalizationsEn extends AppLocalizations {
   String get auth_password_hint => 'Enter your password';
 
   @override
-  String get auth_forgot_password => 'Forget Password?';
+  String get auth_forgot_password => 'Forgot Password?';
 
   @override
   String get auth_login_button => 'Login';
 
   @override
-  String get auth_no_account => 'Don’t have an account ?';
+  String get auth_no_account => 'Don\'t have an account?';
 
   @override
-  String get auth_signup => 'Signup';
+  String get auth_signup => 'Sign Up';
 
   @override
-  String get auth_google_login => 'Login with Google';
+  String get auth_google_login => 'Continue with Google';
 
   @override
   String get auth_signup_title => 'Create your account';
@@ -103,7 +104,7 @@ class AppLocalizationsEn extends AppLocalizations {
   String get auth_confirm_password_hint => 'Confirm your password';
 
   @override
-  String get auth_signup_button => 'Sign up';
+  String get auth_signup_button => 'Sign Up';
 
   @override
   String get auth_have_account => 'Already have an account?';
@@ -112,22 +113,22 @@ class AppLocalizationsEn extends AppLocalizations {
   String get auth_login_here => 'Login';
 
   @override
-  String get auth_google_signup => 'Sign up with Google';
+  String get auth_google_signup => 'Sign Up with Google';
 
   @override
-  String get auth_forgot_password_title => 'Forget Password';
+  String get auth_forgot_password_title => 'Forgot Password';
 
   @override
-  String get auth_reset_password => 'Reset password';
+  String get auth_reset_password => 'Reset Password';
 
   @override
   String get home_welcome_back => 'Welcome Back ✨';
 
   @override
-  String get language_short_en => 'En';
+  String get language_short_en => 'EN';
 
   @override
-  String get language_short_ar => 'Ar';
+  String get language_short_ar => 'AR';
 
   @override
   String get category_all => 'All';
@@ -148,13 +149,13 @@ class AppLocalizationsEn extends AppLocalizations {
   String get nav_home => 'Home';
 
   @override
-  String get nav_favorite => 'Favorite';
+  String get nav_favorite => 'Favorites';
 
   @override
   String get nav_profile => 'Profile';
 
   @override
-  String get search_event_hint => 'Search for event';
+  String get search_event_hint => 'Search for an event';
 
   @override
   String get profile_logout => 'Logout';
@@ -169,31 +170,37 @@ class AppLocalizationsEn extends AppLocalizations {
   String get event_description_label => 'Description';
 
   @override
-  String get event_description_hint => 'Event Description....';
+  String get event_description_hint => 'Event Description...';
 
   @override
   String get event_date_label => 'Event Date';
 
   @override
-  String get event_date_hint => 'Choose date';
+  String get event_date_hint => 'Choose Date';
 
   @override
   String get event_time_label => 'Event Time';
 
   @override
-  String get event_time_hint => 'Choose time';
+  String get event_time_hint => 'Choose Time';
 
   @override
-  String get event_add_button => 'Add event';
+  String get event_add_button => 'Add Event';
 
   @override
-  String get event_details_title => 'Event details';
+  String get event_details_title => 'Event Details';
+
+  @override
+  String get event_edit_title => 'Edit Event';
+
+  @override
+  String get event_update_button => 'Update Event';
 
   @override
   String get home_tab => 'Home';
 
   @override
-  String get favorite_tab => 'Favorite';
+  String get favorite_tab => 'Favorites';
 
   @override
   String get profile_tab => 'Profile';

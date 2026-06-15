@@ -233,7 +233,7 @@ abstract class AppLocalizations {
   /// No description provided for @auth_forgot_password.
   ///
   /// In en, this message translates to:
-  /// **'Forget Password?'**
+  /// **'Forgot Password?'**
   String get auth_forgot_password;
 
   /// No description provided for @auth_login_button.
@@ -245,19 +245,19 @@ abstract class AppLocalizations {
   /// No description provided for @auth_no_account.
   ///
   /// In en, this message translates to:
-  /// **'Don’t have an account ?'**
+  /// **'Don\'t have an account?'**
   String get auth_no_account;
 
   /// No description provided for @auth_signup.
   ///
   /// In en, this message translates to:
-  /// **'Signup'**
+  /// **'Sign Up'**
   String get auth_signup;
 
   /// No description provided for @auth_google_login.
   ///
   /// In en, this message translates to:
-  /// **'Login with Google'**
+  /// **'Continue with Google'**
   String get auth_google_login;
 
   /// No description provided for @auth_signup_title.
@@ -281,7 +281,7 @@ abstract class AppLocalizations {
   /// No description provided for @auth_signup_button.
   ///
   /// In en, this message translates to:
-  /// **'Sign up'**
+  /// **'Sign Up'**
   String get auth_signup_button;
 
   /// No description provided for @auth_have_account.
@@ -299,19 +299,19 @@ abstract class AppLocalizations {
   /// No description provided for @auth_google_signup.
   ///
   /// In en, this message translates to:
-  /// **'Sign up with Google'**
+  /// **'Sign Up with Google'**
   String get auth_google_signup;
 
   /// No description provided for @auth_forgot_password_title.
   ///
   /// In en, this message translates to:
-  /// **'Forget Password'**
+  /// **'Forgot Password'**
   String get auth_forgot_password_title;
 
   /// No description provided for @auth_reset_password.
   ///
   /// In en, this message translates to:
-  /// **'Reset password'**
+  /// **'Reset Password'**
   String get auth_reset_password;
 
   /// No description provided for @home_welcome_back.
@@ -323,13 +323,13 @@ abstract class AppLocalizations {
   /// No description provided for @language_short_en.
   ///
   /// In en, this message translates to:
-  /// **'En'**
+  /// **'EN'**
   String get language_short_en;
 
   /// No description provided for @language_short_ar.
   ///
   /// In en, this message translates to:
-  /// **'Ar'**
+  /// **'AR'**
   String get language_short_ar;
 
   /// No description provided for @category_all.
@@ -371,7 +371,7 @@ abstract class AppLocalizations {
   /// No description provided for @nav_favorite.
   ///
   /// In en, this message translates to:
-  /// **'Favorite'**
+  /// **'Favorites'**
   String get nav_favorite;
 
   /// No description provided for @nav_profile.
@@ -383,7 +383,7 @@ abstract class AppLocalizations {
   /// No description provided for @search_event_hint.
   ///
   /// In en, this message translates to:
-  /// **'Search for event'**
+  /// **'Search for an event'**
   String get search_event_hint;
 
   /// No description provided for @profile_logout.
@@ -413,7 +413,7 @@ abstract class AppLocalizations {
   /// No description provided for @event_description_hint.
   ///
   /// In en, this message translates to:
-  /// **'Event Description....'**
+  /// **'Event Description...'**
   String get event_description_hint;
 
   /// No description provided for @event_date_label.
@@ -425,7 +425,7 @@ abstract class AppLocalizations {
   /// No description provided for @event_date_hint.
   ///
   /// In en, this message translates to:
-  /// **'Choose date'**
+  /// **'Choose Date'**
   String get event_date_hint;
 
   /// No description provided for @event_time_label.
@@ -437,20 +437,32 @@ abstract class AppLocalizations {
   /// No description provided for @event_time_hint.
   ///
   /// In en, this message translates to:
-  /// **'Choose time'**
+  /// **'Choose Time'**
   String get event_time_hint;
 
   /// No description provided for @event_add_button.
   ///
   /// In en, this message translates to:
-  /// **'Add event'**
+  /// **'Add Event'**
   String get event_add_button;
 
   /// No description provided for @event_details_title.
   ///
   /// In en, this message translates to:
-  /// **'Event details'**
+  /// **'Event Details'**
   String get event_details_title;
+
+  /// No description provided for @event_edit_title.
+  ///
+  /// In en, this message translates to:
+  /// **'Edit Event'**
+  String get event_edit_title;
+
+  /// No description provided for @event_update_button.
+  ///
+  /// In en, this message translates to:
+  /// **'Update Event'**
+  String get event_update_button;
 
   /// No description provided for @home_tab.
   ///
@@ -461,7 +473,7 @@ abstract class AppLocalizations {
   /// No description provided for @favorite_tab.
   ///
   /// In en, this message translates to:
-  /// **'Favorite'**
+  /// **'Favorites'**
   String get favorite_tab;
 
   /// No description provided for @profile_tab.
