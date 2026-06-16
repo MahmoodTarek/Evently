@@ -28,6 +28,8 @@ dependencies:
   image_cropper: ^12.1.0
   smooth_page_indicator: ^2.0.1
   shared_preferences: ^2.5.4
+  firebase_core: ^4.10.0
+  cloud_firestore: ^6.5.0
 
 dev_dependencies:
   flutter_test:
