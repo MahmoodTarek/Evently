@@ -1,7 +1,10 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:evently/app_launch_service.dart';
 import 'package:evently/evently_app.dart';
+import 'package:evently/firebase_options.dart';
 import 'package:evently/provider/language_provider.dart';
 import 'package:evently/provider/theme_provider.dart';
+import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:provider/provider.dart';
 
@@ -9,6 +12,10 @@ void main() async {
   WidgetsFlutterBinding.ensureInitialized();
 
   final isFirstLaunch = await AppLaunchService.isFirstLaunch();
+
+  await Firebase.initializeApp(options: DefaultFirebaseOptions.currentPlatform);
+
+  await FirebaseFirestore.instance.disableNetwork();
 
   runApp(
     MultiProvider(
