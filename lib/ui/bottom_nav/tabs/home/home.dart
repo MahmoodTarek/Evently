@@ -18,9 +18,9 @@ class Home extends StatelessWidget {
           paddingOrientational(child: HomeWelcomeBar(username: 'John Doe')),
 
           CustomSelectedItemsRow(
-            initialValue: categories(context).first.name,
-            optionsTitle: categories(context).map((e) => e.name).toList(),
-            optionsIcon: categories(context).map((e) => e.image).toList(),
+            initialValue: allCategories(context).first.name,
+            optionsTitle: allCategories(context).map((e) => e.name).toList(),
+            optionsIcon: allCategories(context).map((e) => e.image).toList(),
             labelBuilder: (String item) => item,
             onSelected: (String item) => print(item),
           ),

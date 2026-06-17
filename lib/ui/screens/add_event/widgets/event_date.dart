@@ -8,7 +8,9 @@ class EventDate extends StatelessWidget {
   final String prefixIcon;
   final String title;
   final String clickableText;
+  final TextStyle clickableTextStyle;
   final VoidCallback? onIconTap;
+  final Color? underlineColor;
 
   const EventDate({
     super.key,
@@ -16,6 +18,8 @@ class EventDate extends StatelessWidget {
     required this.title,
     required this.clickableText,
     this.onIconTap,
+    required this.clickableTextStyle,
+    this.underlineColor,
   });
 
   @override
@@ -35,7 +39,7 @@ class EventDate extends StatelessWidget {
         CustomTextButton(
           text: clickableText,
           onPressed: onIconTap,
-          textStyle: AppStyles.regular14(context: context),
+          textStyle: clickableTextStyle,
         ),
       ],
     );
