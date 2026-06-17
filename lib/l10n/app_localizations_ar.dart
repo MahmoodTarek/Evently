@@ -214,4 +214,22 @@ class AppLocalizationsAr extends AppLocalizations {
 
   @override
   String get current_language => 'اللغة الحالية';
+
+  @override
+  String get event_title_required_error => 'من فضلك أدخل عنوان الحدث';
+
+  @override
+  String get event_title_length_error =>
+      'يجب أن يكون عنوان الحدث 3 أحرف على الأقل';
+
+  @override
+  String get event_title_max_length_error =>
+      'يجب ألا يزيد عنوان الحدث عن 50 حرفًا';
+
+  @override
+  String get event_title_special_char_error =>
+      'عنوان الحدث يحتوي على رموز غير مسموح بها';
+
+  @override
+  String get event_added_successfully => 'تمت اضافة الحدث بنجاح';
 }

@@ -213,4 +213,21 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get current_language => 'Current Language';
+
+  @override
+  String get event_title_required_error => 'Please enter an event title';
+
+  @override
+  String get event_title_length_error => 'Title must be at least 3 characters';
+
+  @override
+  String get event_title_max_length_error =>
+      'Title must not exceed 50 characters';
+
+  @override
+  String get event_title_special_char_error =>
+      'Title contains invalid characters';
+
+  @override
+  String get event_added_successfully => 'Event added successfully';
 }

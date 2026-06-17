@@ -499,6 +499,36 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Current Language'**
   String get current_language;
+
+  /// No description provided for @event_title_required_error.
+  ///
+  /// In en, this message translates to:
+  /// **'Please enter an event title'**
+  String get event_title_required_error;
+
+  /// No description provided for @event_title_length_error.
+  ///
+  /// In en, this message translates to:
+  /// **'Title must be at least 3 characters'**
+  String get event_title_length_error;
+
+  /// No description provided for @event_title_max_length_error.
+  ///
+  /// In en, this message translates to:
+  /// **'Title must not exceed 50 characters'**
+  String get event_title_max_length_error;
+
+  /// No description provided for @event_title_special_char_error.
+  ///
+  /// In en, this message translates to:
+  /// **'Title contains invalid characters'**
+  String get event_title_special_char_error;
+
+  /// No description provided for @event_added_successfully.
+  ///
+  /// In en, this message translates to:
+  /// **'Event added successfully'**
+  String get event_added_successfully;
 }
 
 class _AppLocalizationsDelegate
