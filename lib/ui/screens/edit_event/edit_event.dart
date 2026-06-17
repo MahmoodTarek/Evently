@@ -1,6 +1,6 @@
 import 'package:evently/data/categories.dart';
 import 'package:evently/l10n/app_localizations.dart';
-import 'package:evently/model/category.dart';
+import 'package:evently/ui/category.dart';
 import 'package:evently/ui/screens/add_event/widgets/event_date.dart';
 import 'package:evently/ui/screens/on_boarding/widgets/custom_form_field.dart';
 import 'package:evently/ui/widgets/custom_app_bar.dart';
@@ -156,6 +156,7 @@ class _EditEventState extends State<EditEvent> {
                     prefixIcon: AppIcons.icDate,
                     title: localization.event_date_label,
                     clickableText: 'February 22, 2002',
+                    clickableTextStyle: AppStyles.regular14(context: context),
                   ),
                 ),
 
@@ -165,6 +166,7 @@ class _EditEventState extends State<EditEvent> {
                     prefixIcon: AppIcons.icTime,
                     title: localization.event_time_label,
                     clickableText: '01:00 AM',
+                      clickableTextStyle: AppStyles.regular14(context: context)
                   ),
                 ),
 

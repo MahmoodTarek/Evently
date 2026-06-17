@@ -1,4 +1,3 @@
-import 'package:evently/utils/app_theme_extension.dart';
 import 'package:flutter/material.dart';
 
 class CustomTextButton extends StatelessWidget {
@@ -29,7 +28,6 @@ class CustomTextButton extends StatelessWidget {
         text,
         style:
             textStyle?.copyWith(
-              decorationColor: context.colors.mainColor,
               decoration: isUnderline ? TextDecoration.underline : null,
             ) ??
             TextStyle(

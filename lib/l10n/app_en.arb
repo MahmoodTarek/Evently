@@ -2,29 +2,22 @@
   "language": "Language",
   "language_ar": "Arabic",
   "language_en": "English",
-
   "theme": "Theme",
   "dark_mode": "Dark mode",
   "light_mode": "Light mode",
-
   "common_skip": "Skip",
   "common_start": "Let's Start",
   "common_get_started": "Get Started",
   "common_next": "Next",
   "common_or": "Or",
-
   "onboarding_personalize_title": "Personalize Your Experience",
   "onboarding_personalize_description": "Choose your preferred theme and language to get started with a comfortable, tailored experience that suits your style.",
-
   "onboarding_discover_events_title": "Find Events That Inspire You",
   "onboarding_discover_events_description": "Dive into a world of events crafted to fit your unique interests. Whether you're into live music, art workshops, professional networking, or simply discovering new experiences, we have something for everyone. Our curated recommendations will help you explore, connect, and make the most of every opportunity around you.",
-
   "onboarding_event_planning_title": "Effortless Event Planning",
   "onboarding_event_planning_description": "Take the hassle out of organizing events with our all-in-one planning tools. From setting up invites and managing RSVPs to scheduling reminders and coordinating details, we’ve got you covered. Plan with ease and focus on what matters – creating an unforgettable experience for you and your guests.",
-
   "onboarding_social_title": "Connect with Friends & Share Moments",
   "onboarding_social_description": "Make every event memorable by sharing the experience with others. Our platform lets you invite friends, keep everyone in the loop, and celebrate moments together. Capture and share the excitement with your network, so you can relive the highlights and cherish the memories.",
-
   "auth_login_title": "Login to your account",
   "auth_email_hint": "Enter your email",
   "auth_password_hint": "Enter your password",
@@ -33,7 +26,6 @@
   "auth_no_account": "Don't have an account?",
   "auth_signup": "Sign Up",
   "auth_google_login": "Continue with Google",
-
   "auth_signup_title": "Create your account",
   "auth_name_hint": "Enter your name",
   "auth_confirm_password_hint": "Confirm your password",
@@ -43,24 +35,19 @@
   "auth_google_signup": "Sign Up with Google",
   "auth_forgot_password_title": "Forgot Password",
   "auth_reset_password": "Reset Password",
-
   "home_welcome_back": "Welcome Back ✨",
   "language_short_en": "EN",
   "language_short_ar": "AR",
-
   "category_all": "All",
   "category_sport": "Sport",
   "category_birthday": "Birthday",
   "category_book_club": "Book Club",
   "category_exhibition": "Exhibition",
-
   "nav_home": "Home",
   "nav_favorite": "Favorites",
   "nav_profile": "Profile",
   "search_event_hint": "Search for an event",
-
   "profile_logout": "Logout",
-
   "event_title_label": "Title",
   "event_title_hint": "Event Title",
   "event_description_label": "Description",
@@ -78,5 +65,10 @@
   "profile_tab": "Profile",
   "english": "English",
   "arabic": "Arabic",
-  "current_language": "Current Language"
+  "current_language": "Current Language",
+  "event_title_required_error": "Please enter an event title",
+  "event_title_length_error": "Title must be at least 3 characters",
+  "event_title_max_length_error": "Title must not exceed 50 characters",
+  "event_title_special_char_error": "Title contains invalid characters",
+  "event_added_successfully": "Event added successfully"
 }
