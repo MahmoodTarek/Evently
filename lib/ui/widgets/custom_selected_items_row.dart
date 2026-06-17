@@ -3,7 +3,7 @@ import 'package:evently/utils/app_theme_extension.dart';
 import 'package:evently/utils/resources/app_styles.dart';
 import 'package:flutter/material.dart';
 
-class CustomSelectedItemsRow<T> extends StatefulWidget {
+class CustomSelectedItemsRow extends StatefulWidget {
   final List<String> optionsTitle;
   final List<String>? optionsIcon;
   final String? initialValue;
@@ -22,11 +22,11 @@ class CustomSelectedItemsRow<T> extends StatefulWidget {
   });
 
   @override
-  State<CustomSelectedItemsRow<T>> createState() =>
-      _CustomSelectedItemsRowState<T>();
+  State<CustomSelectedItemsRow> createState() =>
+      _CustomSelectedItemsRowState();
 }
 
-class _CustomSelectedItemsRowState<T> extends State<CustomSelectedItemsRow<T>> {
+class _CustomSelectedItemsRowState extends State<CustomSelectedItemsRow> {
   late String? selectedItem;
 
   @override
@@ -47,16 +47,20 @@ class _CustomSelectedItemsRowState<T> extends State<CustomSelectedItemsRow<T>> {
 
           return ItemCard(
             title: item,
+            icon: widget.optionsIcon != null
+                ? widget.optionsIcon![index]
+                : null,
             isSelected: item == selectedItem,
             onTap: () {
               setState(() {
                 selectedItem = item;
               });
+
+              widget.onSelected?.call(item);
             },
-            icon: widget.optionsIcon != null
-                ? widget.optionsIcon![index]
-                : null,
-            itemTextStyle: AppStyles.semiBold16(context: context).copyWith(
+            itemTextStyle: AppStyles.semiBold16(
+              context: context,
+            ).copyWith(
               color: item == selectedItem
                   ? Colors.white
                   : context.colors.mainText,
