@@ -1,6 +1,7 @@
-import 'package:evently/data/categories.dart';
 import 'package:evently/l10n/app_localizations.dart';
-import 'package:evently/ui/category.dart';
+import 'package:evently/model/category.dart';
+import 'package:evently/provider/categories_provider.dart';
+import 'package:evently/provider/events_provider.dart';
 import 'package:evently/ui/screens/add_event/widgets/event_date.dart';
 import 'package:evently/ui/screens/on_boarding/widgets/custom_form_field.dart';
 import 'package:evently/ui/widgets/custom_app_bar.dart';
@@ -12,6 +13,7 @@ import 'package:evently/utils/resources/app_styles.dart';
 import 'package:evently/utils/screen_size.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:provider/provider.dart';
 
 class EditEvent extends StatefulWidget {
   const EditEvent({super.key});
@@ -50,8 +52,11 @@ class _EditEventState extends State<EditEvent> {
   Widget build(BuildContext context) {
     final double height = context.height;
     final double width = context.width;
+    final EventsProvider eventsProvider = Provider.of<EventsProvider>(context);
+    final CategoriesProvider categoriesProvider =
+        Provider.of<CategoriesProvider>(context);
     final localization = AppLocalizations.of(context)!;
-    List<Category> categoriesList = categories(context).skip(1).toList();
+    List<Category> categories = CategoriesProvider.categories;
 
     return Scaffold(
       appBar: CustomAppBar(
@@ -89,8 +94,8 @@ class _EditEventState extends State<EditEvent> {
 
                 CustomSelectedItemsRow(
                   initialValue: selectedCategory,
-                  optionsTitle: categoriesList.map((e) => e.name).toList(),
-                  optionsIcon: categoriesList.map((e) => e.image).toList(),
+                  optionsTitle: categories.map((e) => e.name).toList(),
+                  optionsIcon: categories.map((e) => e.image).toList(),
                   labelBuilder: (String item) => item,
                   onSelected: (String item) => print(item),
                 ),
@@ -166,7 +171,7 @@ class _EditEventState extends State<EditEvent> {
                     prefixIcon: AppIcons.icTime,
                     title: localization.event_time_label,
                     clickableText: '01:00 AM',
-                      clickableTextStyle: AppStyles.regular14(context: context)
+                    clickableTextStyle: AppStyles.regular14(context: context),
                   ),
                 ),
 

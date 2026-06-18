@@ -1,5 +1,8 @@
-import 'package:evently/data/categories.dart';
 import 'package:evently/l10n/app_localizations.dart';
+import 'package:evently/model/category.dart';
+import 'package:evently/model/event.dart';
+import 'package:evently/provider/categories_provider.dart';
+import 'package:evently/provider/events_provider.dart';
 import 'package:evently/ui/bottom_nav/tabs/home/widgets/event_card.dart';
 import 'package:evently/ui/screens/on_boarding/widgets/custom_form_field.dart';
 import 'package:evently/utils/app_theme_extension.dart';
@@ -7,12 +10,20 @@ import 'package:evently/utils/resources/app_assets.dart';
 import 'package:evently/utils/resources/app_styles.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:provider/provider.dart';
 
 class Favorite extends StatelessWidget {
   const Favorite({super.key});
 
   @override
   Widget build(BuildContext context) {
+    final EventsProvider eventsProvider = Provider.of<EventsProvider>(context);
+    final CategoriesProvider categories = Provider.of<CategoriesProvider>(
+      context,
+    );
+    final List<Event> events = eventsProvider.events;
+    final List<Category> categoriesList = CategoriesProvider.categories;
+
     return Padding(
       padding: const EdgeInsets.symmetric(horizontal: 16),
       child: SingleChildScrollView(
@@ -45,11 +56,15 @@ class Favorite extends StatelessWidget {
               itemBuilder: (context, index) => Padding(
                 padding: const EdgeInsets.only(bottom: 16),
                 child: EventCard(
-                  category: categories(context).first.name,
-                  backgroundImage: AppImages.imgLightCategoryBirthday,
-                  title: 'This is a Birthday Party ',
-                  date: '21 Jan',
-                  isFavorite: true,
+                  event: Event(
+                    category: categoriesList.first.name,
+                    imageUrl: AppImages.imgLightCategoryBirthday,
+                    title: 'This is a Birthday Party ',
+                    date: DateTime.now(),
+                    isFavorite: true,
+                    description: '',
+                    time: '',
+                  ),
                 ),
               ),
             ),

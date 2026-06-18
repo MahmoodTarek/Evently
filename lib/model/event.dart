@@ -1,5 +1,5 @@
 class Event {
-  static const String collectionName = 'Events';
+  static const String collectionName = 'events';
   String id;
   final String title;
   final String description;
@@ -22,7 +22,7 @@ class Event {
 
   Event.fromFirestore(Map<String, dynamic> map)
     : this(
-        id: map['id'],
+        id: map['id'] ?? '',
         title: map['title'],
         description: map['description'],
         category: map['category'],
@@ -34,6 +34,7 @@ class Event {
 
   Map<String, dynamic> toFirestore() {
     return {
+      'id': id,
       'title': title,
       'description': description,
       'category': category,
