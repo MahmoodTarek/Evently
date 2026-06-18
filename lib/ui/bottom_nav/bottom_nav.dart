@@ -26,7 +26,7 @@ class _BottomNavState extends State<BottomNav> {
 
   late final NotchBottomBarController _controller;
 
-  final List<Widget> tabs = const [Home(), Favorite(), Profile()];
+  final List<Widget> tabs = [Home(), const Favorite(), const Profile()];
 
   @override
   void initState() {

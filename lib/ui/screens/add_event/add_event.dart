@@ -1,7 +1,8 @@
-import 'package:evently/data/categories.dart';
 import 'package:evently/data/firebase_utils/firebase_utils.dart';
 import 'package:evently/l10n/app_localizations.dart';
 import 'package:evently/model/event.dart';
+import 'package:evently/provider/categories_provider.dart';
+import 'package:evently/provider/events_provider.dart';
 import 'package:evently/ui/screens/add_event/widgets/event_date.dart';
 import 'package:evently/ui/screens/add_event/widgets/toast_message.dart';
 import 'package:evently/ui/screens/on_boarding/widgets/custom_form_field.dart';
@@ -9,13 +10,14 @@ import 'package:evently/ui/widgets/custom_app_bar.dart';
 import 'package:evently/ui/widgets/custom_elevated_button.dart';
 import 'package:evently/ui/widgets/custom_selected_items_row.dart';
 import 'package:evently/utils/app_theme_extension.dart';
+import 'package:evently/utils/formated_extension.dart';
 import 'package:evently/utils/resources/app_assets.dart';
 import 'package:evently/utils/resources/app_styles.dart';
 import 'package:evently/utils/resources/app_validator.dart';
 import 'package:evently/utils/screen_size.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
-import 'package:intl/intl.dart';
+import 'package:provider/provider.dart';
 
 class AddEvent extends StatefulWidget {
   const AddEvent({super.key});
@@ -26,7 +28,7 @@ class AddEvent extends StatefulWidget {
 
 class _AddEventState extends State<AddEvent> {
   int selectedIndex = 0;
-  String selectedCategory = '';
+  String selectedCategory = CategoryType.sports.name;
   String title = '';
   String description = '';
   DateTime? selectedDate;
@@ -38,6 +40,9 @@ class _AddEventState extends State<AddEvent> {
   final _formKey = GlobalKey<FormState>();
   final titleController = TextEditingController();
   final descriptionController = TextEditingController();
+  String? selectedCategoryImage;
+  CategoriesProvider? categoriesProvider;
+  EventsProvider? eventsProvider;
 
   List<String> lightCategoriesImages = [
     AppImages.imgLightCategorySport,
@@ -66,15 +71,16 @@ class _AddEventState extends State<AddEvent> {
         description = descriptionController.text;
       });
     });
-  }
 
-  @override
-  void didChangeDependencies() {
-    super.didChangeDependencies();
+    categoriesProvider = Provider.of<CategoriesProvider>(
+      context,
+      listen: false,
+    );
+    eventsProvider = Provider.of<EventsProvider>(context, listen: false);
 
-    if (selectedCategory.isEmpty) {
-      selectedCategory = categories(context).first.name;
-    }
+    WidgetsBinding.instance.addPostFrameCallback((timeStamp) {
+      eventsProvider?.getEvents();
+    });
   }
 
   @override
@@ -82,17 +88,18 @@ class _AddEventState extends State<AddEvent> {
     final double height = context.height;
     final double width = context.width;
 
-    final selectedCategoryImage = context.isDark
+    selectedCategoryImage = context.isDark
         ? darkCategoriesImages[selectedIndex]
         : lightCategoriesImages[selectedIndex];
 
-    final eventCategories = categories(context);
+    final categories = CategoriesProvider.categories;
 
     final dateTextColor = isDateValid ? context.colors.mainColor : Colors.red;
 
     final timeTextColor = isTimeValid ? context.colors.mainColor : Colors.red;
 
     final localization = AppLocalizations.of(context)!;
+
     return Scaffold(
       appBar: CustomAppBar(
         title: localization.event_add_button,
@@ -121,7 +128,7 @@ class _AddEventState extends State<AddEvent> {
                     decoration: BoxDecoration(
                       borderRadius: BorderRadius.circular(16),
                       image: DecorationImage(
-                        image: AssetImage(selectedCategoryImage),
+                        image: AssetImage(selectedCategoryImage!),
                         fit: BoxFit.fill,
                       ),
                     ),
@@ -129,20 +136,18 @@ class _AddEventState extends State<AddEvent> {
                 ),
 
                 CustomSelectedItemsRow(
-                  initialValue: eventCategories.first.name,
-                  optionsTitle: eventCategories.map((e) => e.name).toList(),
-                  optionsIcon: eventCategories.map((e) => e.image).toList(),
+                  initialValue: selectedCategory,
+                  optionsTitle: categories.map((e) => e.name).toList(),
+                  optionsIcon: categories.map((e) => e.image).toList(),
                   labelBuilder: (item) => item,
                   onSelected: (item) {
-                    final index = eventCategories.indexWhere(
+                    final selectedCategoryItem = categories.firstWhere(
                       (category) => category.name == item,
                     );
 
-                    if (index == -1) return;
-
                     setState(() {
-                      selectedCategory = item;
-                      selectedIndex = index;
+                      selectedCategory = selectedCategoryItem.name;
+                      selectedIndex = categories.indexOf(selectedCategoryItem);
                     });
                   },
                 ),
@@ -298,13 +303,16 @@ class _AddEventState extends State<AddEvent> {
       });
       return;
     }
+    print(
+      "onAddEventButtonClicked : selectedCategory: ${selectedCategory.toString()}",
+    );
     final event = Event(
       title: title,
       description: description,
       date: selectedDate,
       time: selectedTime,
       category: selectedCategory,
-      imageUrl: '',
+      imageUrl: selectedCategoryImage!,
     );
 
     await FirebaseUtils.addEvent(event: event).timeout(
@@ -362,9 +370,7 @@ class _AddEventState extends State<AddEvent> {
 
       isDateValid = true;
 
-      formatedDate = DateFormat.yMMMd(
-        Localizations.localeOf(context).languageCode,
-      ).format(picked);
+      formatedDate = picked.formatedToDayAndMon();
     });
   }
 
@@ -406,6 +412,7 @@ class _AddEventState extends State<AddEvent> {
     setState(() {
       selectedTime = picked;
       formattedTime = picked.format(context);
+      isTimeValid = true;
     });
   }
 
@@ -414,5 +421,7 @@ class _AddEventState extends State<AddEvent> {
     super.dispose();
     titleController.dispose();
     descriptionController.dispose();
+
+    eventsProvider?.getEvents(category: categoriesProvider!.selectedCategory);
   }
 }
