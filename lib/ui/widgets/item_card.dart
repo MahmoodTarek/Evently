@@ -76,7 +76,15 @@ class ItemCard extends StatelessWidget {
               const SizedBox(width: 8),
             ],
 
-            Text(labelBuilder?.call(title) ?? title, style: itemTextStyle),
+            Flexible(
+              child: Text(
+                labelBuilder?.call(title) ?? title,
+                style: itemTextStyle,
+                maxLines: 1,
+                softWrap: true,
+                overflow: .ellipsis,
+              ),
+            ),
 
             if (!isIconPrefix && icon != null) ...[
               const SizedBox(width: 8),

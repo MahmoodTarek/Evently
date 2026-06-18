@@ -1,16 +1,40 @@
-import 'package:evently/data/categories.dart';
+import 'package:evently/provider/categories_provider.dart';
+import 'package:evently/provider/events_provider.dart';
 import 'package:evently/ui/bottom_nav/tabs/home/widgets/event_card.dart';
 import 'package:evently/ui/bottom_nav/tabs/home/widgets/home_welcome_bar.dart';
 import 'package:evently/ui/widgets/custom_selected_items_row.dart';
-import 'package:evently/utils/resources/app_assets.dart';
 import 'package:evently/utils/resources/app_routes.dart';
+import 'package:evently/utils/resources/app_styles.dart';
+import 'package:evently/utils/screen_size.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 
-class Home extends StatelessWidget {
+class Home extends StatefulWidget {
   const Home({super.key});
 
   @override
+  State createState() => _HomeState();
+}
+
+class _HomeState extends State {
+  @override
+  void initState() {
+    super.initState();
+
+    WidgetsBinding.instance.addPostFrameCallback((_) {
+      context.read<EventsProvider>().getEvents();
+      context.read<CategoriesProvider>().changeCategory(CategoryType.all);
+    });
+  }
+
+  @override
   Widget build(BuildContext context) {
+    final eventsProvider = context.watch<EventsProvider>();
+    final categoriesProvider = context.watch<CategoriesProvider>();
+
+    var events = eventsProvider.events;
+    final categories = CategoriesProvider.allCategories;
+
     return SingleChildScrollView(
       child: Column(
         spacing: 24,
@@ -18,33 +42,54 @@ class Home extends StatelessWidget {
           paddingOrientational(child: HomeWelcomeBar(username: 'John Doe')),
 
           CustomSelectedItemsRow(
-            initialValue: allCategories(context).first.name,
-            optionsTitle: allCategories(context).map((e) => e.name).toList(),
-            optionsIcon: allCategories(context).map((e) => e.image).toList(),
-            labelBuilder: (String item) => item,
-            onSelected: (String item) => print(item),
+            initialValue: categoriesProvider.selectedCategory.name,
+            optionsTitle: categories.map((e) => e.name).toList(),
+            optionsIcon: categories.map((e) => e.image).toList(),
+            labelBuilder: (item) => item,
+            onSelected: (categoryName) async {
+              final category = CategoryType.values.firstWhere(
+                (e) => e.name == categoryName,
+              );
+
+              categoriesProvider.changeCategory(category);
+
+              await eventsProvider.getEvents(category: category);
+              events = eventsProvider.events;
+            },
           ),
-          ListView.builder(
-            shrinkWrap: true,
-            padding: EdgeInsets.only(bottom: 24),
-            physics: const NeverScrollableScrollPhysics(),
-            itemCount: 10,
-            itemBuilder: (context, index) => Padding(
-              padding: const EdgeInsets.only(right: 16, left: 16, bottom: 16),
-              child: InkWell(
-                onTap: () {
-                  Navigator.pushNamed(context, AppRoutes.eventDetails);
-                },
-                child: EventCard(
-                  category: categories(context).first.name,
-                  backgroundImage: AppImages.imgLightCategoryBirthday,
-                  title: 'This is a Birthday Party ',
-                  date: '21 Jan',
-                  isFavorite: true,
-                ),
+
+          if (events.isEmpty)
+            Container(
+              height: context.height * .50,
+              width: context.width,
+              alignment: Alignment.center,
+              child: Text(
+                'No Events yet!',
+                style: AppStyles.semiBold24(context: context).copyWith(),
               ),
+            )
+          else
+            ListView.builder(
+              shrinkWrap: true,
+              physics: const NeverScrollableScrollPhysics(),
+              padding: const EdgeInsets.only(bottom: 24),
+              itemCount: events.length,
+              itemBuilder: (context, index) {
+                return Padding(
+                  padding: const EdgeInsets.only(
+                    right: 16,
+                    left: 16,
+                    bottom: 16,
+                  ),
+                  child: InkWell(
+                    onTap: () {
+                      Navigator.pushNamed(context, AppRoutes.eventDetails);
+                    },
+                    child: EventCard(event: events[index]),
+                  ),
+                );
+              },
             ),
-          ),
         ],
       ),
     );
