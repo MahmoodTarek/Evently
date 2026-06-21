@@ -1,10 +1,11 @@
+import 'package:evently/l10n/app_localizations.dart';
 import 'package:evently/provider/categories_provider.dart';
 import 'package:evently/provider/events_provider.dart';
 import 'package:evently/ui/bottom_nav/tabs/home/widgets/event_card.dart';
 import 'package:evently/ui/bottom_nav/tabs/home/widgets/home_welcome_bar.dart';
+import 'package:evently/ui/widgets/custom_empty_screen.dart';
 import 'package:evently/ui/widgets/custom_selected_items_row.dart';
 import 'package:evently/utils/resources/app_routes.dart';
-import 'package:evently/utils/resources/app_styles.dart';
 import 'package:evently/utils/screen_size.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
@@ -31,7 +32,6 @@ class _HomeState extends State {
   Widget build(BuildContext context) {
     final eventsProvider = context.watch<EventsProvider>();
     final categoriesProvider = context.watch<CategoriesProvider>();
-
     var events = eventsProvider.events;
     final categories = CategoriesProvider.allCategories;
 
@@ -59,14 +59,11 @@ class _HomeState extends State {
           ),
 
           if (events.isEmpty)
-            Container(
-              height: context.height * .50,
+            CustomEmptyScreen(
+              title: AppLocalizations.of(context)!.noEventsTitle,
+              description: AppLocalizations.of(context)!.noEventsDescription,
+              height: context.height * .60,
               width: context.width,
-              alignment: Alignment.center,
-              child: Text(
-                'No Events yet!',
-                style: AppStyles.semiBold24(context: context).copyWith(),
-              ),
             )
           else
             ListView.builder(
@@ -85,7 +82,18 @@ class _HomeState extends State {
                     onTap: () {
                       Navigator.pushNamed(context, AppRoutes.eventDetails);
                     },
-                    child: EventCard(event: events[index]),
+                    child: EventCard(
+                      key: ValueKey(events[index].id),
+
+                      event: events[index],
+                      onFavIconTap: (isFavorite) async {
+                        if (isFavorite) {
+                          await eventsProvider.toggleFavorite(events[index].id);
+                        } else {
+                          await eventsProvider.toggleFavorite(events[index].id);
+                        }
+                      },
+                    ),
                   ),
                 );
               },

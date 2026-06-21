@@ -6,11 +6,13 @@ import 'package:evently/utils/resources/app_assets.dart';
 import 'package:evently/utils/resources/app_styles.dart';
 import 'package:flutter/material.dart';
 
-class EventCard extends StatefulWidget {
+
+class EventCard extends StatelessWidget {
   final Event event;
   final double radius;
   final double height;
   final double width;
+  final void Function(bool) onFavIconTap;
 
   const EventCard({
     super.key,
@@ -18,65 +20,95 @@ class EventCard extends StatefulWidget {
     this.height = 200,
     this.width = double.infinity,
     required this.event,
+    required this.onFavIconTap,
   });
 
   @override
-  State<EventCard> createState() => _EventCardState();
-}
-
-class _EventCardState extends State<EventCard> {
-  late bool isFavorite = widget.event.isFavorite;
-  late String iconFav = isFavorite
-      ? AppIcons.selectedFavorite
-      : AppIcons.unselectedFavorite;
-
-  @override
   Widget build(BuildContext context) {
+    final eventImage = eventCategoryImage(
+      event.category,
+      context,
+    );
+
     return Container(
-      width: widget.width,
-      height: widget.height,
+      width: width,
+      height: height,
       padding: const EdgeInsets.all(8),
       decoration: BoxDecoration(
         image: DecorationImage(
-          image: AssetImage(widget.event.imageUrl),
+          image: AssetImage(eventImage),
           fit: BoxFit.cover,
-          alignment: .center,
         ),
-        borderRadius: BorderRadius.circular(widget.radius),
-        border: Border.all(width: 1, color: context.colors.stroke),
+        borderRadius: BorderRadius.circular(radius),
+        border: Border.all(
+          width: 1,
+          color: context.colors.stroke,
+        ),
       ),
       child: Column(
-        mainAxisAlignment: .spaceBetween,
+        mainAxisAlignment: MainAxisAlignment.spaceBetween,
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           ItemCard(
-            title: widget.event.date.formatedToDayAndMon(),
+            title: event.date.formatedToDayAndMon(),
             backgroundColor: context.colors.background,
             borderColor: context.colors.stroke,
             itemTextStyle: AppStyles.semiBold16(
               context: context,
-            ).copyWith(color: context.colors.mainColor),
+            ).copyWith(
+              color: context.colors.mainColor,
+            ),
           ),
 
           ItemCard(
-            title: widget.event.title,
-            icon: iconFav,
+            title: event.title,
+            icon: event.isFavorite
+                ? AppIcons.selectedFavorite
+                : AppIcons.unselectedFavorite,
             isIconPrefix: false,
             width: double.infinity,
             backgroundColor: context.colors.background,
             borderColor: context.colors.stroke,
-            itemTextStyle: AppStyles.medium14(context: context),
+            itemTextStyle: AppStyles.medium14(
+              context: context,
+            ),
             onIconTap: () {
-              setState(() {
-                isFavorite = !isFavorite;
-                iconFav = isFavorite
-                    ? AppIcons.selectedFavorite
-                    : AppIcons.unselectedFavorite;
-              });
+              onFavIconTap(
+                event.isFavorite,
+              );
             },
           ),
         ],
       ),
     );
+  }
+
+  String eventCategoryImage(String category, BuildContext context) {
+    switch (category) {
+      case 'sports':
+        return context.isDark
+            ? AppImages.imgDarkCategorySport
+            : AppImages.imgLightCategorySport;
+
+      case 'birthday':
+        return context.isDark
+            ? AppImages.imgDarkCategoryBirthday
+            : AppImages.imgLightCategoryBirthday;
+
+      case 'bookClub':
+        return context.isDark
+            ? AppImages.imgDarkCategoryBookClub
+            : AppImages.imgLightCategoryBookClub;
+
+      case 'exhibition':
+        return context.isDark
+            ? AppImages.imgDarkCategoryExhibition
+            : AppImages.imgLightCategoryExhibition;
+
+      default:
+        return context.isDark
+            ? AppImages.imgDarkCategoryExhibition
+            : AppImages.imgLightCategoryExhibition;
+    }
   }
 }

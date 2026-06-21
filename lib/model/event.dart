@@ -6,8 +6,8 @@ class Event {
   final String category;
   final DateTime date;
   final String time;
-  final bool isFavorite;
   final String imageUrl;
+  bool isFavorite;
 
   Event({
     this.id = '',

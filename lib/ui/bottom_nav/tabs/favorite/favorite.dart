@@ -1,28 +1,50 @@
 import 'package:evently/l10n/app_localizations.dart';
-import 'package:evently/model/category.dart';
 import 'package:evently/model/event.dart';
-import 'package:evently/provider/categories_provider.dart';
 import 'package:evently/provider/events_provider.dart';
 import 'package:evently/ui/bottom_nav/tabs/home/widgets/event_card.dart';
 import 'package:evently/ui/screens/on_boarding/widgets/custom_form_field.dart';
+import 'package:evently/ui/widgets/custom_empty_screen.dart';
 import 'package:evently/utils/app_theme_extension.dart';
 import 'package:evently/utils/resources/app_assets.dart';
 import 'package:evently/utils/resources/app_styles.dart';
+import 'package:evently/utils/screen_size.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:provider/provider.dart';
 
-class Favorite extends StatelessWidget {
+class Favorite extends StatefulWidget {
   const Favorite({super.key});
+
+  @override
+  State<Favorite> createState() => _FavoriteState();
+}
+
+class _FavoriteState extends State<Favorite> {
+  late final TextEditingController _searchController;
+  late final EventsProvider eventsProvider;
+
+  @override
+  void dispose() {
+    _searchController.clear();
+    _searchController.dispose();
+    super.dispose();
+  }
+
+
+  @override
+  void initState() {
+    super.initState();
+    _searchController = TextEditingController();
+    eventsProvider = Provider.of<EventsProvider>(context, listen: false);
+    eventsProvider.loadFavoriteEvents();
+  }
 
   @override
   Widget build(BuildContext context) {
     final EventsProvider eventsProvider = Provider.of<EventsProvider>(context);
-    final CategoriesProvider categories = Provider.of<CategoriesProvider>(
-      context,
-    );
-    final List<Event> events = eventsProvider.events;
-    final List<Category> categoriesList = CategoriesProvider.categories;
+    final List<Event> events = _searchController.text.isEmpty ? eventsProvider
+        .favoriteEvents
+        : eventsProvider.searchResults;
 
     return Padding(
       padding: const EdgeInsets.symmetric(horizontal: 16),
@@ -30,7 +52,21 @@ class Favorite extends StatelessWidget {
         child: Column(
           spacing: 16,
           children: [
+            if (eventsProvider.favoriteEvents.isEmpty)
+              CustomEmptyScreen(
+                title: AppLocalizations.of(context)!.noFavoritesTitle,
+                description: AppLocalizations.of(context)!
+                    .noFavoritesDescription,
+                height: context.height,
+                width: context.width,
+              )
+            else
             CustomFormField(
+              controller: _searchController,
+              validator: (value) => null,
+              onChanged: (value) {
+                eventsProvider.searchEvents(value);
+              },
               hintText: AppLocalizations.of(context)!.search_event_hint,
               hintStyle: AppStyles.regular14(
                 context: context,
@@ -52,21 +88,25 @@ class Favorite extends StatelessWidget {
               shrinkWrap: true,
               padding: EdgeInsets.only(bottom: 24),
               physics: const NeverScrollableScrollPhysics(),
-              itemCount: 10,
-              itemBuilder: (context, index) => Padding(
-                padding: const EdgeInsets.only(bottom: 16),
-                child: EventCard(
-                  event: Event(
-                    category: categoriesList.first.name,
-                    imageUrl: AppImages.imgLightCategoryBirthday,
-                    title: 'This is a Birthday Party ',
-                    date: DateTime.now(),
-                    isFavorite: true,
-                    description: '',
-                    time: '',
+              itemCount: events.length,
+              itemBuilder: (context, index) =>
+                  Padding(
+                    padding: const EdgeInsets.only(bottom: 16),
+                    child: EventCard(
+                      event: Event(
+                        category: events[index].category,
+                        imageUrl: events[index].imageUrl,
+                        title: events[index].title,
+                        date: events[index].date,
+                        isFavorite: events[index].isFavorite,
+                        description: '',
+                        time: '',
+                      ),
+                      onFavIconTap: (isFavorite) {
+                        eventsProvider.toggleFavorite(events[index].id);
+                      },
+                    ),
                   ),
-                ),
-              ),
             ),
           ],
         ),
