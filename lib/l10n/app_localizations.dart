@@ -529,6 +529,30 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Event added successfully'**
   String get event_added_successfully;
+
+  /// No description provided for @noEventsTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'No Events Found'**
+  String get noEventsTitle;
+
+  /// No description provided for @noEventsDescription.
+  ///
+  /// In en, this message translates to:
+  /// **'There are no events available \n Check back later or try a different category.'**
+  String get noEventsDescription;
+
+  /// No description provided for @noFavoritesTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'No Favorite Events Found'**
+  String get noFavoritesTitle;
+
+  /// No description provided for @noFavoritesDescription.
+  ///
+  /// In en, this message translates to:
+  /// **'There are no favorite events available\n Check back later or try a different category.'**
+  String get noFavoritesDescription;
 }
 
 class _AppLocalizationsDelegate

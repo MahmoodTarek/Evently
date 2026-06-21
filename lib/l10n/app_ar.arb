@@ -2,28 +2,22 @@
   "language": "اللغة",
   "language_ar": "العربية",
   "language_en": "الإنجليزية",
-
   "theme": "المظهر",
   "dark_mode": "الوضع الداكن",
   "light_mode": "الوضع الفاتح",
-
   "common_skip": "تخطي",
   "common_start": "يلا نبدأ",
   "common_get_started": "ابدأ الآن",
   "common_next": "التالي",
   "common_or": "أو",
-
   "onboarding_personalize_title": "خصص تجربتك",
   "onboarding_personalize_description": "اختار اللغة والمظهر اللي يناسبوك علشان تبدأ تجربة مريحة ومصممة على ذوقك.",
   "onboarding_discover_events_title": "اكتشف فعاليات تناسب اهتماماتك",
   "onboarding_discover_events_description": "ادخل عالم مليان فعاليات متنوعة تناسب اهتماماتك. سواء بتحب الموسيقى، ورش العمل، التعارف المهني، أو تجربة حاجات جديدة، هتلاقي فعاليات مناسبة ليك في كل وقت.",
-
   "onboarding_event_planning_title": "تنظيم الفعاليات بقى أسهل",
   "onboarding_event_planning_description": "خطط لأي فعالية بسهولة باستخدام أدوات متكاملة لإدارة الدعوات، متابعة تأكيدات الحضور، وجدولة التذكيرات وتنظيم كل التفاصيل المهمة.",
-
   "onboarding_social_title": "شارك اللحظات مع أصحابك",
   "onboarding_social_description": "خلي كل فعالية ليها طابع مميز بمشاركة أصحابك. ابعت الدعوات، تابع كل التفاصيل، وشارك أجمل اللحظات مع الناس اللي يهموك.",
-
   "auth_login_title": "سجل دخول لحسابك",
   "auth_email_hint": "اكتب البريد الإلكتروني",
   "auth_password_hint": "اكتب كلمة المرور",
@@ -32,7 +26,6 @@
   "auth_no_account": "معندكش حساب؟",
   "auth_signup": "إنشاء حساب",
   "auth_google_login": "تسجيل الدخول باستخدام جوجل",
-
   "auth_signup_title": "أنشئ حسابك",
   "auth_name_hint": "اكتب اسمك",
   "auth_confirm_password_hint": "أكد كلمة المرور",
@@ -40,29 +33,21 @@
   "auth_have_account": "عندك حساب بالفعل؟",
   "auth_login_here": "سجل دخول",
   "auth_google_signup": "إنشاء حساب باستخدام جوجل",
-
   "auth_forgot_password_title": "نسيت كلمة المرور",
   "auth_reset_password": "إعادة تعيين كلمة المرور",
-
   "home_welcome_back": "أهلاً بعودتك ✨",
-
   "language_short_en": "EN",
   "language_short_ar": "AR",
-
   "category_all": "الكل",
   "category_sport": "رياضة",
   "category_birthday": "عيد ميلاد",
   "category_book_club": "نادي قراءة",
   "category_exhibition": "معرض",
-
   "nav_home": "الرئيسية",
   "nav_favorite": "المفضلة",
   "nav_profile": "الحساب",
-
   "search_event_hint": "ابحث عن فعالية",
-
   "profile_logout": "تسجيل الخروج",
-
   "event_title_label": "العنوان",
   "event_title_hint": "اكتب عنوان الفعالية",
   "event_description_label": "الوصف",
@@ -85,5 +70,10 @@
   "event_title_length_error": "يجب أن يكون عنوان الحدث 3 أحرف على الأقل",
   "event_title_max_length_error": "يجب ألا يزيد عنوان الحدث عن 50 حرفًا",
   "event_title_special_char_error": "عنوان الحدث يحتوي على رموز غير مسموح بها",
-  "event_added_successfully": "تمت اضافة الحدث بنجاح"
+  "event_added_successfully": "تمت اضافة الحدث بنجاح",
+  "noEventsTitle": "لا توجد فعاليات",
+  "noEventsDescription": "لا توجد فعاليات . حاول مرة أخرى لاحقاً أو اختر تصنيفاً آخر.",
+  "noFavoritesTitle": "لا توجد فعاليات مفضلة",
+  "noFavoritesDescription": "لا توجد فعاليات مفضلة متاحة . حاول مرة أخرى لاحقاً."
+
 }

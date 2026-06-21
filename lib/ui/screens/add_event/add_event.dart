@@ -313,6 +313,7 @@ class _AddEventState extends State<AddEvent> {
       time: selectedTime,
       category: selectedCategory,
       imageUrl: selectedCategoryImage!,
+      isFavorite: false,
     );
 
     await FirebaseUtils.addEvent(event: event).timeout(
