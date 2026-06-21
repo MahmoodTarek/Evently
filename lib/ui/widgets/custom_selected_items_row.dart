@@ -30,7 +30,6 @@ class CustomSelectedItemsRow extends StatelessWidget {
         itemCount: optionsTitle.length,
         itemBuilder: (context, index) {
           final item = optionsTitle[index];
-
           return ItemCard(
             title: item,
             icon: optionsIcon != null ? optionsIcon![index] : null,

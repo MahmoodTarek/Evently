@@ -6,25 +6,75 @@ import 'package:flutter/material.dart';
 
 class EventsProvider extends ChangeNotifier {
   List<Event> events = [];
+  List<Event> favoriteEvents = [];
+  List<Event> searchResults = [];
 
   Future<void> getEvents({CategoryType category = CategoryType.all}) async {
     try {
-      print("events length Before getEvents: ${events.length}");
       Query<Event> query = FirebaseUtils.getEventsCollection();
 
       if (category != CategoryType.all) {
         query = query.where('category', isEqualTo: category.name);
       }
 
-      final snapshot = await query.get();
+      final snapshot = await query.orderBy('date', descending: false).get();
 
       events = snapshot.docs.map((doc) => doc.data()).toList();
 
-      print("events length After getEvents: ${events.length}");
       notifyListeners();
     } catch (e, stackTrace) {
       debugPrint('Get Events Error: $e');
       debugPrintStack(stackTrace: stackTrace);
     }
+  }
+
+  void loadFavoriteEvents() {
+    favoriteEvents = events.where((e) => e.isFavorite).toList();
+    searchResults = favoriteEvents;
+    notifyListeners();
+  }
+
+  Future<void> toggleFavorite(String eventId) async {
+    final index = events.indexWhere((e) => e.id == eventId);
+    if (index == -1) return;
+
+    final currentValue = events[index].isFavorite;
+    final newValue = !currentValue;
+
+    events[index].isFavorite = newValue;
+
+    loadFavoriteEvents();
+    notifyListeners();
+
+    try {
+      await FirebaseUtils.getEventsCollection().doc(eventId).update({
+        'isFavorite': newValue,
+      });
+    } catch (e) {
+      events[index].isFavorite = currentValue;
+
+      loadFavoriteEvents();
+      notifyListeners();
+
+      debugPrint('Toggle Favorite Error: $e');
+    }
+  }
+
+  void searchEvents(String query) {
+    if (query.isEmpty) {
+      searchResults = favoriteEvents;
+    } else {
+      searchResults = favoriteEvents.where((event) {
+        final q = query.toLowerCase();
+
+        return event.title.toLowerCase().contains(q) ||
+            event.description.toLowerCase().contains(q) ||
+            event.date.toString().toLowerCase().contains(q) ||
+            event.time.toLowerCase().contains(q) ||
+            event.category.toString().toLowerCase().contains(q);
+      }).toList();
+    }
+
+    notifyListeners();
   }
 }

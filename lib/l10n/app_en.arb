@@ -70,5 +70,9 @@
   "event_title_length_error": "Title must be at least 3 characters",
   "event_title_max_length_error": "Title must not exceed 50 characters",
   "event_title_special_char_error": "Title contains invalid characters",
-  "event_added_successfully": "Event added successfully"
+  "event_added_successfully": "Event added successfully",
+  "noEventsTitle": "No Events Found",
+  "noEventsDescription": "There are no events available \n Check back later or try a different category.",
+  "noFavoritesTitle": "No Favorite Events Found",
+  "noFavoritesDescription": "There are no favorite events available\n Check back later or try a different category."
 }
