@@ -232,4 +232,18 @@ class AppLocalizationsAr extends AppLocalizations {
 
   @override
   String get event_added_successfully => 'تمت اضافة الحدث بنجاح';
+
+  @override
+  String get noEventsTitle => 'لا توجد فعاليات';
+
+  @override
+  String get noEventsDescription =>
+      'لا توجد فعاليات . حاول مرة أخرى لاحقاً أو اختر تصنيفاً آخر.';
+
+  @override
+  String get noFavoritesTitle => 'لا توجد فعاليات مفضلة';
+
+  @override
+  String get noFavoritesDescription =>
+      'لا توجد فعاليات مفضلة متاحة . حاول مرة أخرى لاحقاً.';
 }

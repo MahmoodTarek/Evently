@@ -41,7 +41,6 @@ class CategoriesProvider extends ChangeNotifier {
     if (selectedCategory == category) return;
 
     selectedCategory = category;
-    print("selectedCategory:$selectedCategory");
     notifyListeners();
   }
 }

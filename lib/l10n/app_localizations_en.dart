@@ -230,4 +230,18 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get event_added_successfully => 'Event added successfully';
+
+  @override
+  String get noEventsTitle => 'No Events Found';
+
+  @override
+  String get noEventsDescription =>
+      'There are no events available \n Check back later or try a different category.';
+
+  @override
+  String get noFavoritesTitle => 'No Favorite Events Found';
+
+  @override
+  String get noFavoritesDescription =>
+      'There are no favorite events available\n Check back later or try a different category.';
 }
