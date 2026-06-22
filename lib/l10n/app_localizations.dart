@@ -530,29 +530,107 @@ abstract class AppLocalizations {
   /// **'Event added successfully'**
   String get event_added_successfully;
 
-  /// No description provided for @noEventsTitle.
+  /// No description provided for @no_events_title.
   ///
   /// In en, this message translates to:
   /// **'No Events Found'**
-  String get noEventsTitle;
+  String get no_events_title;
 
-  /// No description provided for @noEventsDescription.
+  /// No description provided for @no_events_description.
   ///
   /// In en, this message translates to:
-  /// **'There are no events available \n Check back later or try a different category.'**
-  String get noEventsDescription;
+  /// **'No events available. Please try again later or choose another category.'**
+  String get no_events_description;
 
-  /// No description provided for @noFavoritesTitle.
+  /// No description provided for @no_favorites_title.
   ///
   /// In en, this message translates to:
-  /// **'No Favorite Events Found'**
-  String get noFavoritesTitle;
+  /// **'No Favorite Events'**
+  String get no_favorites_title;
 
-  /// No description provided for @noFavoritesDescription.
+  /// No description provided for @no_favorites_description.
   ///
   /// In en, this message translates to:
-  /// **'There are no favorite events available\n Check back later or try a different category.'**
-  String get noFavoritesDescription;
+  /// **'No favorite events available. Please try again later.'**
+  String get no_favorites_description;
+
+  /// No description provided for @email_required.
+  ///
+  /// In en, this message translates to:
+  /// **'Email is required'**
+  String get email_required;
+
+  /// No description provided for @email_invalid.
+  ///
+  /// In en, this message translates to:
+  /// **'Please enter a valid email address'**
+  String get email_invalid;
+
+  /// No description provided for @password_required.
+  ///
+  /// In en, this message translates to:
+  /// **'Password is required'**
+  String get password_required;
+
+  /// No description provided for @password_too_short.
+  ///
+  /// In en, this message translates to:
+  /// **'Password must be at least 8 characters long'**
+  String get password_too_short;
+
+  /// No description provided for @confirm_password_required.
+  ///
+  /// In en, this message translates to:
+  /// **'Please confirm your password'**
+  String get confirm_password_required;
+
+  /// No description provided for @passwords_do_not_match.
+  ///
+  /// In en, this message translates to:
+  /// **'Passwords do not match'**
+  String get passwords_do_not_match;
+
+  /// No description provided for @name_required.
+  ///
+  /// In en, this message translates to:
+  /// **'Name is required'**
+  String get name_required;
+
+  /// No description provided for @name_too_short.
+  ///
+  /// In en, this message translates to:
+  /// **'Name must be at least 3 characters long'**
+  String get name_too_short;
+
+  /// No description provided for @name_too_long.
+  ///
+  /// In en, this message translates to:
+  /// **'Name must not exceed 20 characters'**
+  String get name_too_long;
+
+  /// No description provided for @name_contains_numbers.
+  ///
+  /// In en, this message translates to:
+  /// **'Name must not contain numbers'**
+  String get name_contains_numbers;
+
+  /// No description provided for @name_contains_special_characters.
+  ///
+  /// In en, this message translates to:
+  /// **'Name must not contain special characters'**
+  String get name_contains_special_characters;
+
+  /// No description provided for @auth_created_successfully.
+  ///
+  /// In en, this message translates to:
+  /// **'Account created successfully'**
+  String get auth_created_successfully;
+
+  /// No description provided for @auth_failed_to_create_account.
+  ///
+  /// In en, this message translates to:
+  /// **'Failed to create account'**
+  String get auth_failed_to_create_account;
 }
 
 class _AppLocalizationsDelegate

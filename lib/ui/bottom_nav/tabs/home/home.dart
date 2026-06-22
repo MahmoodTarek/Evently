@@ -60,8 +60,8 @@ class _HomeState extends State {
 
           if (events.isEmpty)
             CustomEmptyScreen(
-              title: AppLocalizations.of(context)!.noEventsTitle,
-              description: AppLocalizations.of(context)!.noEventsDescription,
+              title: AppLocalizations.of(context)!.no_events_title,
+              description: AppLocalizations.of(context)!.no_events_description,
               height: context.height * .60,
               width: context.width,
             )
