@@ -232,16 +232,57 @@ class AppLocalizationsEn extends AppLocalizations {
   String get event_added_successfully => 'Event added successfully';
 
   @override
-  String get noEventsTitle => 'No Events Found';
+  String get no_events_title => 'No Events Found';
 
   @override
-  String get noEventsDescription =>
-      'There are no events available \n Check back later or try a different category.';
+  String get no_events_description =>
+      'No events available. Please try again later or choose another category.';
 
   @override
-  String get noFavoritesTitle => 'No Favorite Events Found';
+  String get no_favorites_title => 'No Favorite Events';
 
   @override
-  String get noFavoritesDescription =>
-      'There are no favorite events available\n Check back later or try a different category.';
+  String get no_favorites_description =>
+      'No favorite events available. Please try again later.';
+
+  @override
+  String get email_required => 'Email is required';
+
+  @override
+  String get email_invalid => 'Please enter a valid email address';
+
+  @override
+  String get password_required => 'Password is required';
+
+  @override
+  String get password_too_short =>
+      'Password must be at least 8 characters long';
+
+  @override
+  String get confirm_password_required => 'Please confirm your password';
+
+  @override
+  String get passwords_do_not_match => 'Passwords do not match';
+
+  @override
+  String get name_required => 'Name is required';
+
+  @override
+  String get name_too_short => 'Name must be at least 3 characters long';
+
+  @override
+  String get name_too_long => 'Name must not exceed 20 characters';
+
+  @override
+  String get name_contains_numbers => 'Name must not contain numbers';
+
+  @override
+  String get name_contains_special_characters =>
+      'Name must not contain special characters';
+
+  @override
+  String get auth_created_successfully => 'Account created successfully';
+
+  @override
+  String get auth_failed_to_create_account => 'Failed to create account';
 }

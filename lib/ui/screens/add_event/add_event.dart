@@ -4,11 +4,11 @@ import 'package:evently/model/event.dart';
 import 'package:evently/provider/categories_provider.dart';
 import 'package:evently/provider/events_provider.dart';
 import 'package:evently/ui/screens/add_event/widgets/event_date.dart';
-import 'package:evently/ui/screens/add_event/widgets/toast_message.dart';
 import 'package:evently/ui/screens/on_boarding/widgets/custom_form_field.dart';
 import 'package:evently/ui/widgets/custom_app_bar.dart';
 import 'package:evently/ui/widgets/custom_elevated_button.dart';
 import 'package:evently/ui/widgets/custom_selected_items_row.dart';
+import 'package:evently/ui/widgets/toast_message.dart';
 import 'package:evently/utils/app_theme_extension.dart';
 import 'package:evently/utils/formated_extension.dart';
 import 'package:evently/utils/resources/app_assets.dart';
@@ -303,9 +303,7 @@ class _AddEventState extends State<AddEvent> {
       });
       return;
     }
-    print(
-      "onAddEventButtonClicked : selectedCategory: ${selectedCategory.toString()}",
-    );
+
     final event = Event(
       title: title,
       description: description,

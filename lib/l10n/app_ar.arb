@@ -71,9 +71,21 @@
   "event_title_max_length_error": "يجب ألا يزيد عنوان الحدث عن 50 حرفًا",
   "event_title_special_char_error": "عنوان الحدث يحتوي على رموز غير مسموح بها",
   "event_added_successfully": "تمت اضافة الحدث بنجاح",
-  "noEventsTitle": "لا توجد فعاليات",
-  "noEventsDescription": "لا توجد فعاليات . حاول مرة أخرى لاحقاً أو اختر تصنيفاً آخر.",
-  "noFavoritesTitle": "لا توجد فعاليات مفضلة",
-  "noFavoritesDescription": "لا توجد فعاليات مفضلة متاحة . حاول مرة أخرى لاحقاً."
-
+  "no_events_title": "لا توجد فعاليات",
+  "no_events_description": "لا توجد فعاليات. حاول مرة أخرى لاحقاً أو اختر تصنيفاً آخر.",
+  "no_favorites_title": "لا توجد فعاليات مفضلة",
+  "no_favorites_description": "لا توجد فعاليات مفضلة متاحة. حاول مرة أخرى لاحقاً.",
+  "email_required": "البريد الإلكتروني مطلوب",
+  "email_invalid": "يرجى إدخال بريد إلكتروني صحيح",
+  "password_required": "كلمة المرور مطلوبة",
+  "password_too_short": "يجب أن تتكون كلمة المرور من 8 أحرف على الأقل",
+  "confirm_password_required": "يرجى تأكيد كلمة المرور",
+  "passwords_do_not_match": "كلمتا المرور غير متطابقتين",
+  "name_required": "الاسم مطلوب",
+  "name_too_short": "يجب أن يتكون الاسم من 3 أحرف على الأقل",
+  "name_too_long": "يجب ألا يزيد الاسم عن 20 حرفًا",
+  "name_contains_numbers": "يجب ألا يحتوي الاسم على أرقام",
+  "name_contains_special_characters": "يجب ألا يحتوي الاسم على رموز خاصة",
+  "auth_created_successfully": "تم إنشاء حساب جديد بنجاح",
+  "auth_failed_to_create_account": "حدث خطأ أثناء إنشاء الحساب"
 }
