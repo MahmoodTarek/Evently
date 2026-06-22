@@ -287,4 +287,10 @@ class AppLocalizationsAr extends AppLocalizations {
 
   @override
   String get auth_failed_to_create_account => 'حدث خطأ أثناء إنشاء الحساب';
+
+  @override
+  String get auth_failed_to_login => 'تعذر تسجيل الدخول';
+
+  @override
+  String get auth_login_successfully => 'تم تسجيل الدخول';
 }

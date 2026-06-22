@@ -631,6 +631,18 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Failed to create account'**
   String get auth_failed_to_create_account;
+
+  /// No description provided for @auth_failed_to_login.
+  ///
+  /// In en, this message translates to:
+  /// **'Failed to login'**
+  String get auth_failed_to_login;
+
+  /// No description provided for @auth_login_successfully.
+  ///
+  /// In en, this message translates to:
+  /// **'Logged in successfully'**
+  String get auth_login_successfully;
 }
 
 class _AppLocalizationsDelegate
