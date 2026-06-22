@@ -87,5 +87,7 @@
   "name_contains_numbers": "يجب ألا يحتوي الاسم على أرقام",
   "name_contains_special_characters": "يجب ألا يحتوي الاسم على رموز خاصة",
   "auth_created_successfully": "تم إنشاء حساب جديد بنجاح",
-  "auth_failed_to_create_account": "حدث خطأ أثناء إنشاء الحساب"
+  "auth_failed_to_create_account": "حدث خطأ أثناء إنشاء الحساب",
+  "auth_failed_to_login": "تعذر تسجيل الدخول",
+  "auth_login_successfully": "تم تسجيل الدخول"
 }

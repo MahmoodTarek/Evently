@@ -245,6 +245,7 @@ class _RegisterState extends State<Register> {
       final success = await FirebaseAuthService.createNewAccountEmailAndPw(
         email: emailController.text,
         password: passwordController.text,
+          context: context
       );
 
       if (success) {

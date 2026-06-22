@@ -285,4 +285,10 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get auth_failed_to_create_account => 'Failed to create account';
+
+  @override
+  String get auth_failed_to_login => 'Failed to login';
+
+  @override
+  String get auth_login_successfully => 'Logged in successfully';
 }

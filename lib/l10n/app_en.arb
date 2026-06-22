@@ -87,5 +87,7 @@
   "name_contains_numbers": "Name must not contain numbers",
   "name_contains_special_characters": "Name must not contain special characters",
   "auth_created_successfully": "Account created successfully",
-  "auth_failed_to_create_account": "Failed to create account"
+  "auth_failed_to_create_account": "Failed to create account",
+  "auth_failed_to_login": "Failed to login",
+  "auth_login_successfully": "Logged in successfully"
 }

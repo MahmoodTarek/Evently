@@ -1,9 +1,11 @@
+import 'package:evently/data/firebase/auth/firebase_auth_service.dart';
 import 'package:evently/l10n/app_localizations.dart';
 import 'package:evently/ui/screens/on_boarding/widgets/custom_form_field.dart';
 import 'package:evently/ui/widgets/custom_app_bar.dart';
 import 'package:evently/ui/widgets/custom_elevated_button.dart';
 import 'package:evently/ui/widgets/custom_text_button.dart';
 import 'package:evently/ui/widgets/custom_text_divider.dart';
+import 'package:evently/ui/widgets/toast_message.dart';
 import 'package:evently/utils/app_theme_extension.dart';
 import 'package:evently/utils/resources/app_assets.dart';
 import 'package:evently/utils/resources/app_routes.dart';
@@ -106,16 +108,34 @@ class Login extends StatelessWidget {
 
                   const SizedBox(height: 40),
                   CustomElevatedButton(
-                    onPressed: () {
-                      // TODO: Login button
-                      if (!_key.currentState!.validate()) {
-                        return;
+                    onPressed: () async {
+                      final isValid = _key.currentState!.validate();
+                      bool isEmailAndPwValid = false;
+                      if (isValid) {
+                        isEmailAndPwValid = await onLoginClicked(
+                          context: context,
+                          emailController: emailController,
+                          passwordController: passwordController,
+                        );
+
+                        final toastMessage = isEmailAndPwValid
+                            ? AppLocalizations.of(context)!
+                            .auth_login_successfully
+                            : AppLocalizations.of(
+                          context,
+                        )!.auth_failed_to_login;
+
+
+                        ToastMessage.show(
+                          context: context,
+                          message: toastMessage,
+                        );
+                        if (isEmailAndPwValid) {
+                          Navigator.of(
+                            context,
+                          ).pushReplacementNamed(AppRoutes.bottomNav);
+                        }
                       }
-                      emailController.clear();
-                      passwordController.clear();
-                      Navigator.of(
-                        context,
-                      ).pushReplacementNamed(AppRoutes.bottomNav);
                     },
                     backgroundColor: context.colors.mainColor,
                     child: Text(
@@ -187,6 +207,18 @@ class Login extends StatelessWidget {
           ),
         ),
       ),
+    );
+  }
+
+  Future<bool> onLoginClicked({
+    required BuildContext context,
+    required emailController,
+    required passwordController,
+  }) async {
+    return await FirebaseAuthService.loginEmailAndPw(
+      email: emailController.text,
+      password: passwordController.text,
+      context: context,
     );
   }
 }
