@@ -34,7 +34,7 @@ class EventlyApp extends StatelessWidget {
       theme: AppTheme.lightTheme,
       darkTheme: AppTheme.darkTheme,
       themeMode: themeProvider.currentTheme,
-      initialRoute: AppRoutes.bottomNav,
+      initialRoute: AppRoutes.register,
       // isFirstLaunch ? AppRoutes.onBoarding : AppRoutes.bottomNav,
       routes: {
         AppRoutes.bottomNav: (context) => const BottomNav(),

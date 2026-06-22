@@ -234,16 +234,57 @@ class AppLocalizationsAr extends AppLocalizations {
   String get event_added_successfully => 'تمت اضافة الحدث بنجاح';
 
   @override
-  String get noEventsTitle => 'لا توجد فعاليات';
+  String get no_events_title => 'لا توجد فعاليات';
 
   @override
-  String get noEventsDescription =>
-      'لا توجد فعاليات . حاول مرة أخرى لاحقاً أو اختر تصنيفاً آخر.';
+  String get no_events_description =>
+      'لا توجد فعاليات. حاول مرة أخرى لاحقاً أو اختر تصنيفاً آخر.';
 
   @override
-  String get noFavoritesTitle => 'لا توجد فعاليات مفضلة';
+  String get no_favorites_title => 'لا توجد فعاليات مفضلة';
 
   @override
-  String get noFavoritesDescription =>
-      'لا توجد فعاليات مفضلة متاحة . حاول مرة أخرى لاحقاً.';
+  String get no_favorites_description =>
+      'لا توجد فعاليات مفضلة متاحة. حاول مرة أخرى لاحقاً.';
+
+  @override
+  String get email_required => 'البريد الإلكتروني مطلوب';
+
+  @override
+  String get email_invalid => 'يرجى إدخال بريد إلكتروني صحيح';
+
+  @override
+  String get password_required => 'كلمة المرور مطلوبة';
+
+  @override
+  String get password_too_short =>
+      'يجب أن تتكون كلمة المرور من 8 أحرف على الأقل';
+
+  @override
+  String get confirm_password_required => 'يرجى تأكيد كلمة المرور';
+
+  @override
+  String get passwords_do_not_match => 'كلمتا المرور غير متطابقتين';
+
+  @override
+  String get name_required => 'الاسم مطلوب';
+
+  @override
+  String get name_too_short => 'يجب أن يتكون الاسم من 3 أحرف على الأقل';
+
+  @override
+  String get name_too_long => 'يجب ألا يزيد الاسم عن 20 حرفًا';
+
+  @override
+  String get name_contains_numbers => 'يجب ألا يحتوي الاسم على أرقام';
+
+  @override
+  String get name_contains_special_characters =>
+      'يجب ألا يحتوي الاسم على رموز خاصة';
+
+  @override
+  String get auth_created_successfully => 'تم إنشاء حساب جديد بنجاح';
+
+  @override
+  String get auth_failed_to_create_account => 'حدث خطأ أثناء إنشاء الحساب';
 }

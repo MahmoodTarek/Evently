@@ -54,9 +54,9 @@ class _FavoriteState extends State<Favorite> {
           children: [
             if (eventsProvider.favoriteEvents.isEmpty)
               CustomEmptyScreen(
-                title: AppLocalizations.of(context)!.noFavoritesTitle,
+                title: AppLocalizations.of(context)!.no_favorites_title,
                 description: AppLocalizations.of(context)!
-                    .noFavoritesDescription,
+                    .no_favorites_description,
                 height: context.height,
                 width: context.width,
               )

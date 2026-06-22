@@ -6,60 +6,81 @@ final class AppValidator {
 
   static final RegExp _emailRegex = RegExp(r'^[\w\.-]+@([\w-]+\.)+[\w-]{2,}$');
 
-  static String? validateEmail(String? value) {
+  static String? validateEmail(String? value, BuildContext context) {
     final email = value?.trim();
+    final appLocalizations = AppLocalizations.of(context)!;
 
     if (email == null || email.isEmpty) {
-      return "";
+      return appLocalizations.email_required;
     }
 
     if (!_emailRegex.hasMatch(email)) {
-      return "";
+      return appLocalizations.email_invalid;
     }
 
     return null;
   }
 
-  static String? validatePassword(String? value) {
+  static String? validatePassword(String? value, BuildContext context) {
+    final appLocalizations = AppLocalizations.of(context)!;
+
     final password = value?.trim();
+
     if (password == null || password.isEmpty) {
-      return "";
+      return appLocalizations.password_required;
     }
 
     if (password.length < 8) {
-      return "";
+      return appLocalizations.password_too_short;
     }
 
     return null;
   }
 
-  static String? validateConfirmPassword(String? value, String password) {
+  static String? validateConfirmPassword(
+    String? value,
+    String password,
+    BuildContext context,
+  ) {
+    final appLocalizations = AppLocalizations.of(context)!;
+
     final confirmPassword = value?.trim();
 
     if (confirmPassword == null || confirmPassword.isEmpty) {
-      return "";
+      return appLocalizations.confirm_password_required;
     }
 
     if (confirmPassword != password.trim()) {
-      return "";
+      return appLocalizations.passwords_do_not_match;
     }
 
     return null;
   }
 
-  static String? validateName(String? value) {
+  static String? validateName(String? value, BuildContext context) {
+    final appLocalizations = AppLocalizations.of(context)!;
     final name = value?.trim();
+
     if (name == null || name.isEmpty) {
-      return "";
-    } else if (name.length < 3) {
-      return "";
-    } else if (name.length > 20) {
-      return "";
-    } else if (name.contains(RegExp(r'[0-9]'))) {
-      return "";
-    } else if (name.contains(RegExp(r'[!@#$%^&*(),.?":{}|<>]'))) {
-      return "";
+      return appLocalizations.name_required;
     }
+
+    if (name.length < 3) {
+      return appLocalizations.name_too_short;
+    }
+
+    if (name.length > 20) {
+      return appLocalizations.name_too_long;
+    }
+
+    if (name.contains(RegExp(r'[0-9]'))) {
+      return appLocalizations.name_contains_numbers;
+    }
+
+    if (name.contains(RegExp(r'[!@#$%^&*(),.?":{}|<>]'))) {
+      return appLocalizations.name_contains_special_characters;
+    }
+
     return null;
   }
 
