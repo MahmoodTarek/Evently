@@ -3,6 +3,7 @@ import 'package:evently/l10n/app_localizations.dart';
 import 'package:evently/model/event.dart';
 import 'package:evently/provider/categories_provider.dart';
 import 'package:evently/provider/events_provider.dart';
+import 'package:evently/provider/user_provider.dart';
 import 'package:evently/ui/screens/add_event/widgets/event_date.dart';
 import 'package:evently/ui/screens/on_boarding/widgets/custom_form_field.dart';
 import 'package:evently/ui/widgets/custom_app_bar.dart';
@@ -43,7 +44,7 @@ class _AddEventState extends State<AddEvent> {
   String? selectedCategoryImage;
   CategoriesProvider? categoriesProvider;
   EventsProvider? eventsProvider;
-
+  UserProvider? userProvider;
   List<String> lightCategoriesImages = [
     AppImages.imgLightCategorySport,
     AppImages.imgLightCategoryBirthday,
@@ -78,8 +79,10 @@ class _AddEventState extends State<AddEvent> {
     );
     eventsProvider = Provider.of<EventsProvider>(context, listen: false);
 
+    userProvider = Provider.of<UserProvider>(context, listen: false);
+
     WidgetsBinding.instance.addPostFrameCallback((timeStamp) {
-      eventsProvider?.getEvents();
+      eventsProvider?.getEvents(uId: userProvider!.currentUser!.id);
     });
   }
 
@@ -314,14 +317,17 @@ class _AddEventState extends State<AddEvent> {
       isFavorite: false,
     );
 
-    await FirebaseUtils.addEvent(event: event).timeout(
-      Duration(),
-      onTimeout: () {
-        Navigator.pop(context);
+    final userProvider = context.read<UserProvider>();
+    await FirebaseUtils.addEvent(
+      event: event,
+      uId: userProvider.currentUser!.id,
+    ).then(
+      (value) => {
+        Navigator.pop(context),
         ToastMessage.show(
           context: context,
           message: AppLocalizations.of(context)!.event_added_successfully,
-        );
+        ),
       },
     );
   }
@@ -421,6 +427,9 @@ class _AddEventState extends State<AddEvent> {
     titleController.dispose();
     descriptionController.dispose();
 
-    eventsProvider?.getEvents(category: categoriesProvider!.selectedCategory);
+    eventsProvider?.getEvents(
+      category: categoriesProvider!.selectedCategory,
+      uId: userProvider!.currentUser!.id,
+    );
   }
 }

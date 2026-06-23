@@ -1,6 +1,7 @@
 import 'package:evently/l10n/app_localizations.dart';
 import 'package:evently/provider/categories_provider.dart';
 import 'package:evently/provider/events_provider.dart';
+import 'package:evently/provider/user_provider.dart';
 import 'package:evently/ui/bottom_nav/tabs/home/widgets/event_card.dart';
 import 'package:evently/ui/bottom_nav/tabs/home/widgets/home_welcome_bar.dart';
 import 'package:evently/ui/widgets/custom_empty_screen.dart';
@@ -18,18 +19,25 @@ class Home extends StatefulWidget {
 }
 
 class _HomeState extends State {
+  late final UserProvider userProvider;
+  late final String uId;
+
   @override
   void initState() {
     super.initState();
-
+    userProvider = context.read<UserProvider>();
+    uId = userProvider.currentUser!.id;
     WidgetsBinding.instance.addPostFrameCallback((_) {
-      context.read<EventsProvider>().getEvents();
+      context.read<EventsProvider>().getEvents(
+        uId: userProvider.currentUser!.id,
+      );
       context.read<CategoriesProvider>().changeCategory(CategoryType.all);
     });
   }
 
   @override
   Widget build(BuildContext context) {
+    final userProvider = context.watch<UserProvider>();
     final eventsProvider = context.watch<EventsProvider>();
     final categoriesProvider = context.watch<CategoriesProvider>();
     var events = eventsProvider.events;
@@ -39,7 +47,11 @@ class _HomeState extends State {
       child: Column(
         spacing: 24,
         children: [
-          paddingOrientational(child: HomeWelcomeBar(username: 'John Doe')),
+          paddingOrientational(
+            child: HomeWelcomeBar(
+              username: userProvider.currentUser?.name ?? '',
+            ),
+          ),
 
           CustomSelectedItemsRow(
             initialValue: categoriesProvider.selectedCategory.name,
@@ -53,7 +65,10 @@ class _HomeState extends State {
 
               categoriesProvider.changeCategory(category);
 
-              await eventsProvider.getEvents(category: category);
+              await eventsProvider.getEvents(
+                category: category,
+                uId: userProvider.currentUser!.id,
+              );
               events = eventsProvider.events;
             },
           ),
@@ -88,9 +103,15 @@ class _HomeState extends State {
                       event: events[index],
                       onFavIconTap: (isFavorite) async {
                         if (isFavorite) {
-                          await eventsProvider.toggleFavorite(events[index].id);
+                          await eventsProvider.toggleFavorite(
+                            eventId: events[index].id,
+                            uId: uId,
+                          );
                         } else {
-                          await eventsProvider.toggleFavorite(events[index].id);
+                          await eventsProvider.toggleFavorite(
+                            eventId: events[index].id,
+                            uId: uId,
+                          );
                         }
                       },
                     ),

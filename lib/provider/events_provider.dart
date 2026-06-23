@@ -9,9 +9,12 @@ class EventsProvider extends ChangeNotifier {
   List<Event> favoriteEvents = [];
   List<Event> searchResults = [];
 
-  Future<void> getEvents({CategoryType category = CategoryType.all}) async {
+  Future<void> getEvents({
+    CategoryType category = CategoryType.all,
+    required String uId,
+  }) async {
     try {
-      Query<Event> query = FirebaseUtils.getEventsCollection();
+      Query<Event> query = FirebaseUtils.getEventsCollection(uId: uId);
 
       if (category != CategoryType.all) {
         query = query.where('category', isEqualTo: category.name);
@@ -34,7 +37,10 @@ class EventsProvider extends ChangeNotifier {
     notifyListeners();
   }
 
-  Future<void> toggleFavorite(String eventId) async {
+  Future<void> toggleFavorite({
+    required String eventId,
+    required String uId,
+  }) async {
     final index = events.indexWhere((e) => e.id == eventId);
     if (index == -1) return;
 
@@ -47,9 +53,9 @@ class EventsProvider extends ChangeNotifier {
     notifyListeners();
 
     try {
-      await FirebaseUtils.getEventsCollection().doc(eventId).update({
-        'isFavorite': newValue,
-      });
+      await FirebaseUtils.getEventsCollection(
+        uId: uId,
+      ).doc(eventId).update({'isFavorite': newValue});
     } catch (e) {
       events[index].isFavorite = currentValue;
 

@@ -1,6 +1,7 @@
 import 'dart:io';
 
 import 'package:evently/l10n/app_localizations.dart';
+import 'package:evently/provider/user_provider.dart';
 import 'package:evently/ui/bottom_nav/tabs/profile/pick_image.dart';
 import 'package:evently/ui/bottom_nav/tabs/profile/widgets/action_card.dart';
 import 'package:evently/ui/bottom_nav/tabs/profile/widgets/bottom_nav/language_bottom_sheet.dart';
@@ -13,6 +14,7 @@ import 'package:evently/utils/resources/app_routes.dart';
 import 'package:evently/utils/resources/app_styles.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:provider/provider.dart';
 
 class Profile extends StatefulWidget {
   const Profile({super.key});
@@ -34,6 +36,7 @@ class _ProfileState extends State<Profile> {
 
   @override
   Widget build(BuildContext context) {
+    final userProvider = Provider.of<UserProvider>(context);
     String icLanguagePath = context.isDark
         ? AppIcons.icRightArrowDark
         : AppIcons.icRightArrow;
@@ -60,18 +63,17 @@ class _ProfileState extends State<Profile> {
             const SizedBox(height: 16),
 
             Text(
-              'User Name',
+              userProvider.currentUser!.name,
               style: AppStyles.semiBold20().copyWith(
                 color: context.colors.mainText,
               ),
             ),
 
             Text(
-              'Email@gmail.com',
+              userProvider.currentUser!.email,
               style: AppStyles.regular14(
                 context: context,
-              ).copyWith(color: context.colors.secText,
-              ),
+              ).copyWith(color: context.colors.secText),
             ),
 
             const SizedBox(height: 32),
@@ -104,6 +106,7 @@ class _ProfileState extends State<Profile> {
               title: AppLocalizations.of(context)!.profile_logout,
               actionIcon: InkWell(
                 onTap: () {
+                  userProvider.currentUser = null;
                   Navigator.pushReplacementNamed(context, AppRoutes.login);
                 },
                 child: DirectionalIcon(
