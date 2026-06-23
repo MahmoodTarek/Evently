@@ -1,6 +1,7 @@
 import 'package:evently/l10n/app_localizations.dart';
 import 'package:evently/model/event.dart';
 import 'package:evently/provider/events_provider.dart';
+import 'package:evently/provider/user_provider.dart';
 import 'package:evently/ui/bottom_nav/tabs/home/widgets/event_card.dart';
 import 'package:evently/ui/screens/on_boarding/widgets/custom_form_field.dart';
 import 'package:evently/ui/widgets/custom_empty_screen.dart';
@@ -30,7 +31,6 @@ class _FavoriteState extends State<Favorite> {
     super.dispose();
   }
 
-
   @override
   void initState() {
     super.initState();
@@ -42,8 +42,9 @@ class _FavoriteState extends State<Favorite> {
   @override
   Widget build(BuildContext context) {
     final EventsProvider eventsProvider = Provider.of<EventsProvider>(context);
-    final List<Event> events = _searchController.text.isEmpty ? eventsProvider
-        .favoriteEvents
+    final UserProvider userProvider = Provider.of<UserProvider>(context);
+    final List<Event> events = _searchController.text.isEmpty
+        ? eventsProvider.favoriteEvents
         : eventsProvider.searchResults;
 
     return Padding(
@@ -55,58 +56,61 @@ class _FavoriteState extends State<Favorite> {
             if (eventsProvider.favoriteEvents.isEmpty)
               CustomEmptyScreen(
                 title: AppLocalizations.of(context)!.no_favorites_title,
-                description: AppLocalizations.of(context)!
-                    .no_favorites_description,
+                description: AppLocalizations.of(
+                  context,
+                )!.no_favorites_description,
                 height: context.height,
                 width: context.width,
               )
             else
-            CustomFormField(
-              controller: _searchController,
-              validator: (value) => null,
-              onChanged: (value) {
-                eventsProvider.searchEvents(value);
-              },
-              hintText: AppLocalizations.of(context)!.search_event_hint,
-              hintStyle: AppStyles.regular14(
-                context: context,
-              ).copyWith(color: context.colors.mainText),
-              keyboardType: TextInputType.text,
-              suffixIcon: Padding(
-                padding: const EdgeInsets.all(8.0),
-                child: SvgPicture.asset(
-                  AppIcons.icSearch,
-                  colorFilter: ColorFilter.mode(
-                    context.colors.mainColor,
-                    BlendMode.srcIn,
+              CustomFormField(
+                controller: _searchController,
+                validator: (value) => null,
+                onChanged: (value) {
+                  eventsProvider.searchEvents(value);
+                },
+                hintText: AppLocalizations.of(context)!.search_event_hint,
+                hintStyle: AppStyles.regular14(
+                  context: context,
+                ).copyWith(color: context.colors.mainText),
+                keyboardType: TextInputType.text,
+                suffixIcon: Padding(
+                  padding: const EdgeInsets.all(8.0),
+                  child: SvgPicture.asset(
+                    AppIcons.icSearch,
+                    colorFilter: ColorFilter.mode(
+                      context.colors.mainColor,
+                      BlendMode.srcIn,
+                    ),
                   ),
                 ),
               ),
-            ),
 
             ListView.builder(
               shrinkWrap: true,
               padding: EdgeInsets.only(bottom: 24),
               physics: const NeverScrollableScrollPhysics(),
               itemCount: events.length,
-              itemBuilder: (context, index) =>
-                  Padding(
-                    padding: const EdgeInsets.only(bottom: 16),
-                    child: EventCard(
-                      event: Event(
-                        category: events[index].category,
-                        imageUrl: events[index].imageUrl,
-                        title: events[index].title,
-                        date: events[index].date,
-                        isFavorite: events[index].isFavorite,
-                        description: '',
-                        time: '',
-                      ),
-                      onFavIconTap: (isFavorite) {
-                        eventsProvider.toggleFavorite(events[index].id);
-                      },
-                    ),
+              itemBuilder: (context, index) => Padding(
+                padding: const EdgeInsets.only(bottom: 16),
+                child: EventCard(
+                  event: Event(
+                    category: events[index].category,
+                    imageUrl: events[index].imageUrl,
+                    title: events[index].title,
+                    date: events[index].date,
+                    isFavorite: events[index].isFavorite,
+                    description: '',
+                    time: '',
                   ),
+                  onFavIconTap: (isFavorite) {
+                    eventsProvider.toggleFavorite(
+                      eventId: events[index].id,
+                      uId: userProvider.currentUser!.id,
+                    );
+                  },
+                ),
+              ),
             ),
           ],
         ),

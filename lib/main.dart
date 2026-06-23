@@ -1,4 +1,3 @@
-import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:evently/app_launch_service.dart';
 import 'package:evently/evently_app.dart';
 import 'package:evently/firebase_options.dart';
@@ -6,6 +5,7 @@ import 'package:evently/provider/categories_provider.dart';
 import 'package:evently/provider/events_provider.dart';
 import 'package:evently/provider/language_provider.dart';
 import 'package:evently/provider/theme_provider.dart';
+import 'package:evently/provider/user_provider.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:provider/provider.dart';
@@ -17,8 +17,6 @@ void main() async {
 
   await Firebase.initializeApp(options: DefaultFirebaseOptions.currentPlatform);
 
-  await FirebaseFirestore.instance.disableNetwork();
-
   runApp(
     MultiProvider(
       providers: [
@@ -26,6 +24,7 @@ void main() async {
         ChangeNotifierProvider(create: (context) => ThemeProvider()),
         ChangeNotifierProvider(create: (context) => EventsProvider()),
         ChangeNotifierProvider(create: (context) => CategoriesProvider()),
+        ChangeNotifierProvider(create: (context) => UserProvider()),
       ],
       child: EventlyApp(isFirstLaunch: isFirstLaunch),
     ),
