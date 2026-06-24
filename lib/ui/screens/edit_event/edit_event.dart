@@ -1,19 +1,22 @@
 import 'package:evently/l10n/app_localizations.dart';
 import 'package:evently/model/category.dart';
+import 'package:evently/model/event.dart';
 import 'package:evently/provider/categories_provider.dart';
-import 'package:evently/provider/events_provider.dart';
+import 'package:evently/ui/bottom_nav/tabs/home/widgets/event_card.dart';
 import 'package:evently/ui/screens/add_event/widgets/event_date.dart';
 import 'package:evently/ui/screens/on_boarding/widgets/custom_form_field.dart';
 import 'package:evently/ui/widgets/custom_app_bar.dart';
 import 'package:evently/ui/widgets/custom_elevated_button.dart';
 import 'package:evently/ui/widgets/custom_selected_items_row.dart';
+import 'package:evently/utils/app_pickers.dart';
 import 'package:evently/utils/app_theme_extension.dart';
+import 'package:evently/utils/formated_extension.dart';
 import 'package:evently/utils/resources/app_assets.dart';
 import 'package:evently/utils/resources/app_styles.dart';
+import 'package:evently/utils/resources/app_validator.dart';
 import 'package:evently/utils/screen_size.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
-import 'package:provider/provider.dart';
 
 class EditEvent extends StatefulWidget {
   const EditEvent({super.key});
@@ -23,23 +26,20 @@ class EditEvent extends StatefulWidget {
 }
 
 class _EditEventState extends State<EditEvent> {
-  String selectedCategoryImage = AppImages.imgDarkCategorySport;
-  String selectedCategory = 'Book Club';
-  String title = 'Reading book club ';
-  String description =
-      'Lorem ipsum dolor sit amet consectetur. Vulputate eleifend suscipit eget neque senectus a. Nulla at non malesuada odio duis lectus amet nisi sit. Risus hac enim maecenas auctor et. At cras massa diam porta facilisi lacus purus. Iaculis eget quis ut amet. Sit ac malesuada nisi quis  feugiat.';
-  DateTime? selectedDate;
-  TimeOfDay? selectedTime;
   final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
-  final TextEditingController _titleController = TextEditingController();
-  final TextEditingController _descriptionController = TextEditingController();
 
-  @override
-  void initState() {
-    super.initState();
-    _titleController.text = title;
-    _descriptionController.text = description;
-  }
+  final TextEditingController _titleController = TextEditingController();
+  final TextEditingController _descriptionController =
+  TextEditingController();
+
+  Event? currentEvent;
+
+  DateTime? selectedDate;
+  String? selectedCategory;
+  String? selectedCategoryImage;
+  String? selectedTime;
+
+  bool isInitialized = false;
 
   @override
   void dispose() {
@@ -48,14 +48,36 @@ class _EditEventState extends State<EditEvent> {
     super.dispose();
   }
 
+  void initializeData() {
+    if (isInitialized) return;
+
+    currentEvent =
+    ModalRoute
+        .of(context)!
+        .settings
+        .arguments as Event;
+
+    _titleController.text = currentEvent!.title;
+    _descriptionController.text = currentEvent!.description;
+
+    selectedDate = currentEvent!.date;
+    selectedCategory = currentEvent!.category;
+    selectedTime = currentEvent!.time;
+    selectedCategoryImage =
+        eventCategoryImage(currentEvent!.category, context);
+
+    isInitialized = true;
+  }
+
   @override
   Widget build(BuildContext context) {
+    initializeData();
+
     final double height = context.height;
     final double width = context.width;
-    final EventsProvider eventsProvider = Provider.of<EventsProvider>(context);
-    final CategoriesProvider categoriesProvider =
-        Provider.of<CategoriesProvider>(context);
+
     final localization = AppLocalizations.of(context)!;
+
     List<Category> categories = CategoriesProvider.categories;
 
     return Scaffold(
@@ -64,11 +86,12 @@ class _EditEventState extends State<EditEvent> {
         leading: IconButton(
           onPressed: () => Navigator.pop(context),
           icon: SvgPicture.asset(
-            context.isDark ? AppIcons.icBackDark : AppIcons.icBackLight,
+            context.isDark
+                ? AppIcons.icBackDark
+                : AppIcons.icBackLight,
           ),
         ),
       ),
-
       body: SafeArea(
         top: false,
         child: SingleChildScrollView(
@@ -85,7 +108,7 @@ class _EditEventState extends State<EditEvent> {
                     decoration: BoxDecoration(
                       borderRadius: BorderRadius.circular(16),
                       image: DecorationImage(
-                        image: AssetImage(selectedCategoryImage),
+                        image: AssetImage(selectedCategoryImage!),
                         fit: BoxFit.fill,
                       ),
                     ),
@@ -93,75 +116,105 @@ class _EditEventState extends State<EditEvent> {
                 ),
 
                 CustomSelectedItemsRow(
-                  initialValue: selectedCategory,
-                  optionsTitle: categories.map((e) => e.name).toList(),
-                  optionsIcon: categories.map((e) => e.image).toList(),
+                  initialValue: selectedCategory!,
+                  optionsTitle:
+                  categories.map((e) => e.name).toList(),
+                  optionsIcon:
+                  categories.map((e) => e.image).toList(),
                   labelBuilder: (String item) => item,
-                  onSelected: (String item) => print(item),
+                  onSelected: (String item) {
+                    setState(() {
+                      selectedCategory = item;
+                      selectedCategoryImage =
+                          eventCategoryImage(item, context);
+                    });
+                  },
                 ),
 
-                SizedBox(height: height * 0.02),
+                SizedBox(height: height * .02),
 
                 paddingOrientational(
                   child: Text(
-                    AppLocalizations.of(context)!.event_title_label,
-                    style: AppStyles.medium16(context: context),
+                    localization.event_title_label,
+                    style: AppStyles.medium16(
+                      context: context,
+                    ),
                   ),
                 ),
 
-                SizedBox(height: height * 0.01),
+                SizedBox(height: height * .01),
+
                 paddingOrientational(
                   child: CustomFormField(
                     controller: _titleController,
                     validator: (value) {
-                      if (value == null || value.isEmpty) {
-                        return 'Please enter a title';
-                      }
-                      return null;
+                      return AppValidator.validateTitle(
+                        context: context,
+                        value: value,
+                      );
                     },
-                    /*Note: Add Validation*/
-                    hintText: AppLocalizations.of(context)?.event_title_hint,
+                    hintText:
+                    localization.event_title_hint,
                     hintStyle: AppStyles.regular14(
                       context: context,
-                    ).copyWith(color: context.colors.secText),
+                    ).copyWith(
+                      color: context.colors.secText,
+                    ),
                   ),
                 ),
 
-                SizedBox(height: height * 0.02),
+                SizedBox(height: height * .02),
+
                 paddingOrientational(
                   child: Text(
                     localization.event_description_label,
-                    style: AppStyles.medium16(context: context),
+                    style: AppStyles.medium16(
+                      context: context,
+                    ),
                   ),
                 ),
 
-                SizedBox(height: height * 0.02),
+                SizedBox(height: height * .02),
 
                 paddingOrientational(
                   child: CustomFormField(
                     controller: _descriptionController,
-                    validator: (value) {
-                      if (value == null || value.isEmpty) {
-                        return 'Please enter a description';
-                      }
-                      return null;
-                    },
-                    /*Note: Add Validation*/
-                    hintText: localization.event_title_label,
+                    hintText:
+                    localization.event_description_label,
                     hintStyle: AppStyles.regular14(
                       context: context,
-                    ).copyWith(color: context.colors.secText),
+                    ).copyWith(
+                      color: context.colors.secText,
+                    ),
                     maxLines: 5,
                   ),
                 ),
-                SizedBox(height: height * 0.02),
+
+                SizedBox(height: height * .02),
 
                 paddingOrientational(
                   child: EventDate(
                     prefixIcon: AppIcons.icDate,
                     title: localization.event_date_label,
-                    clickableText: 'February 22, 2002',
-                    clickableTextStyle: AppStyles.regular14(context: context),
+                    clickableText:
+                    selectedDate!.formatedToDayAndMon(),
+                    clickableTextStyle:
+                    AppStyles.regular14(
+                      context: context,
+                    ),
+                    onIconTap: () async {
+                      final pickedDate =
+                      await AppPickers.onChooseDate(
+                        context: context,
+                        selectedDate: selectedDate,
+                      );
+
+                      if (pickedDate != null) {
+                        setState(() {
+                          selectedDate = pickedDate;
+                        });
+                      }
+                    },
                   ),
                 ),
 
@@ -169,25 +222,36 @@ class _EditEventState extends State<EditEvent> {
                   vertical: height * .02,
                   child: EventDate(
                     prefixIcon: AppIcons.icTime,
-                    title: localization.event_time_label,
-                    clickableText: '01:00 AM',
-                    clickableTextStyle: AppStyles.regular14(context: context),
+                    title:
+                    localization.event_time_label,
+                    clickableText: selectedTime!,
+                    clickableTextStyle:
+                    AppStyles.regular14(
+                      context: context,
+                    ),
                   ),
                 ),
 
-                SizedBox(height: height * 0.02),
+                SizedBox(height: height * .02),
 
                 paddingOrientational(
                   child: CustomElevatedButton(
                     onPressed: () {
-                      /*TODO: Add Event Button*/
+                      if (_formKey.currentState!
+                          .validate()) {
+                        // TODO: Update Event
+                      }
                     },
-                    backgroundColor: context.colors.mainColor,
+                    backgroundColor:
+                    context.colors.mainColor,
                     child: Text(
-                      localization.event_update_button,
+                      localization
+                          .event_update_button,
                       style: AppStyles.medium20(
                         context: context,
-                      ).copyWith(color: Colors.white),
+                      ).copyWith(
+                        color: Colors.white,
+                      ),
                     ),
                   ),
                 ),
@@ -205,7 +269,10 @@ class _EditEventState extends State<EditEvent> {
     double vertical = 0,
   }) {
     return Padding(
-      padding: EdgeInsets.symmetric(horizontal: horizontal, vertical: vertical),
+      padding: EdgeInsets.symmetric(
+        horizontal: horizontal,
+        vertical: vertical,
+      ),
       child: child,
     );
   }

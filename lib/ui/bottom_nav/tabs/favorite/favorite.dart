@@ -7,6 +7,7 @@ import 'package:evently/ui/screens/on_boarding/widgets/custom_form_field.dart';
 import 'package:evently/ui/widgets/custom_empty_screen.dart';
 import 'package:evently/utils/app_theme_extension.dart';
 import 'package:evently/utils/resources/app_assets.dart';
+import 'package:evently/utils/resources/app_routes.dart';
 import 'package:evently/utils/resources/app_styles.dart';
 import 'package:evently/utils/screen_size.dart';
 import 'package:flutter/material.dart';
@@ -109,6 +110,7 @@ class _FavoriteState extends State<Favorite> {
                       uId: userProvider.currentUser!.id,
                     );
                   },
+                    onTap: onEventTab(events[index])
                 ),
               ),
             ),
@@ -116,5 +118,11 @@ class _FavoriteState extends State<Favorite> {
         ),
       ),
     );
+  }
+
+  void Function()? onEventTab(Event event) {
+    return () {
+      Navigator.pushNamed(context, AppRoutes.eventDetails, arguments: event);
+    };
   }
 }

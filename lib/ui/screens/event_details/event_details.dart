@@ -1,8 +1,11 @@
 import 'package:evently/l10n/app_localizations.dart';
+import 'package:evently/model/event.dart';
+import 'package:evently/ui/bottom_nav/tabs/home/widgets/event_card.dart';
 import 'package:evently/ui/widgets/custom_app_bar.dart';
 import 'package:evently/ui/widgets/custom_item_card.dart';
 import 'package:evently/utils/app_theme_extension.dart';
 import 'package:evently/utils/resources/app_assets.dart';
+import 'package:evently/utils/resources/app_routes.dart';
 import 'package:evently/utils/resources/app_styles.dart';
 import 'package:evently/utils/screen_size.dart';
 import 'package:flutter/material.dart';
@@ -16,6 +19,12 @@ class EventDetails extends StatelessWidget {
     final localization = AppLocalizations.of(context)!;
     final height = context.height;
     final width = context.width;
+    final currentEvent = ModalRoute
+        .of(context)!
+        .settings
+        .arguments as Event;
+    final categoryImage = eventCategoryImage(currentEvent.category, context);
+
 
     return Scaffold(
       appBar: CustomAppBar(
@@ -27,11 +36,33 @@ class EventDetails extends StatelessWidget {
             context.isDark ? AppIcons.icBackDark : AppIcons.icBackLight,
           ),
         ),
+        actions: [
+          IconButton(
+            onPressed: () {
+              Navigator.pushNamed(
+                  context, AppRoutes.editEvent, arguments: currentEvent);
+            },
+            iconSize: height * 0.04,
+            icon: CustomItemCard(
+              height: height * 0.04,
+              width: width * 0.08,
+              borderRadius: 10,
+              backgroundColor: context.colors.inputs,
+              child: SvgPicture.asset(
+                AppIcons.icEdit,
+                colorFilter: ColorFilter.mode(
+                  context.colors.mainColor,
+                  BlendMode.srcIn,
+                ),
+              ),
+            ),
+          ),
+
+        ],
       ),
 
       body: SafeArea(
         top: false,
-
         child: Padding(
           padding: EdgeInsets.all(width * 0.02),
           child: Column(
@@ -42,7 +73,7 @@ class EventDetails extends StatelessWidget {
                 decoration: BoxDecoration(
                   borderRadius: BorderRadius.circular(16),
                   image: DecorationImage(
-                    image: AssetImage(AppImages.imgDarkCategorySport),
+                    image: AssetImage(categoryImage),
                     fit: BoxFit.fill,
                   ),
                 ),
@@ -51,7 +82,7 @@ class EventDetails extends StatelessWidget {
               SizedBox(height: height * .02),
 
               Text(
-                'We’re going to play football ',
+                currentEvent.title,
                 style: AppStyles.medium18(
                   context: context,
                 ).copyWith(color: context.colors.mainText),
@@ -112,20 +143,25 @@ class EventDetails extends StatelessWidget {
                 ),
               ),
 
-              SizedBox(height: height * 0.02),
-              Text('Description', style: AppStyles.medium18(context: context)),
-              SizedBox(height: height * 0.02),
-
-              CustomItemCard(
-                padding: EdgeInsets.all(width * 0.028),
-                backgroundColor: context.colors.inputs,
-                child: Text(
-                  'Lorem ipsum dolor sit amet consectetur. Vulputate eleifend suscipit eget neque senectus a. Nulla at non malesuada odio duis lectus amet nisi sit. Risus hac enim maecenas auctor et. At cras massa diam porta facilisi lacus purus. Iaculis eget quis ut amet. Sit ac malesuada nisi quis  feugiat.',
-                  style: AppStyles.regular14(
-                    context: context,
-                  ).copyWith(color: context.colors.mainText),
+              if (currentEvent.description.isNotEmpty) ...[
+                SizedBox(height: height * 0.02),
+                Text(
+                  localization.event_description_label,
+                  style: AppStyles.medium18(context: context),
                 ),
-              ),
+                SizedBox(height: height * 0.02),
+
+                CustomItemCard(
+                  padding: EdgeInsets.all(width * 0.028),
+                  backgroundColor: context.colors.inputs,
+                  child: Text(
+                    currentEvent.description,
+                    style: AppStyles.regular14(
+                      context: context,
+                    ).copyWith(color: context.colors.mainText),
+                  ),
+                ),
+              ],
             ],
           ),
         ),
