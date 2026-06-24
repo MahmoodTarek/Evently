@@ -10,6 +10,7 @@ import 'package:evently/ui/widgets/custom_app_bar.dart';
 import 'package:evently/ui/widgets/custom_elevated_button.dart';
 import 'package:evently/ui/widgets/custom_selected_items_row.dart';
 import 'package:evently/ui/widgets/toast_message.dart';
+import 'package:evently/utils/app_pickers.dart';
 import 'package:evently/utils/app_theme_extension.dart';
 import 'package:evently/utils/formated_extension.dart';
 import 'package:evently/utils/resources/app_assets.dart';
@@ -194,6 +195,7 @@ class _AddEventState extends State<AddEvent> {
                 paddingOrientational(
                   child: CustomFormField(
                     hintText: localization.event_description_hint,
+                    controller: descriptionController,
                     hintStyle: AppStyles.regular14(
                       context: context,
                     ).copyWith(color: context.colors.secText),
@@ -209,7 +211,20 @@ class _AddEventState extends State<AddEvent> {
                     clickableText: selectedDate != null
                         ? formatedDate
                         : localization.event_date_hint,
-                    onIconTap: onChooseDate,
+                    onIconTap: () async {
+                      final picked = await AppPickers.onChooseDate(
+                        context: context,
+                        selectedDate: selectedDate,
+                      );
+
+                      if (picked == null) return;
+
+                      setState(() {
+                        selectedDate = picked;
+                        formatedDate = picked.formatedToDayAndMon();
+                        isDateValid = true;
+                      });
+                    },
                     clickableTextStyle: AppStyles.regular14(context: context)
                         .copyWith(
                           color: dateTextColor,
@@ -227,7 +242,20 @@ class _AddEventState extends State<AddEvent> {
                         ? formattedTime
                         : localization.event_time_hint,
 
-                    onIconTap: onChooseTime,
+                    onIconTap: () async {
+                      final picked = await AppPickers.onChooseTime(
+                        context: context,
+                        selectedTime: selectedTime,
+                      );
+
+                      if (picked == null) return;
+
+                      setState(() {
+                        selectedTime = picked;
+                        formattedTime = picked.format(context);
+                        isTimeValid = true;
+                      });
+                    },
                     clickableTextStyle: AppStyles.regular14(context: context)
                         .copyWith(
                           color: timeTextColor,
@@ -250,6 +278,7 @@ class _AddEventState extends State<AddEvent> {
                         return;
                       }
 
+                      print('desc$description');
                       onAddEventButtonClicked(
                         title: title,
                         description: description,
@@ -330,95 +359,6 @@ class _AddEventState extends State<AddEvent> {
         ),
       },
     );
-  }
-
-  Future<void> onChooseDate() async {
-    final picked = await showDatePicker(
-      context: context,
-      locale: Locale(Localizations.localeOf(context).languageCode),
-      initialDate: selectedDate ?? DateTime.now(),
-      firstDate: DateTime.now(),
-      lastDate: DateTime.now().add(const Duration(days: 365)),
-      builder: (context, child) {
-        final isDark = Theme.of(context).brightness == Brightness.dark;
-
-        return Theme(
-          data: Theme.of(context).copyWith(
-            colorScheme: ColorScheme(
-              brightness: isDark ? Brightness.dark : Brightness.light,
-
-              primary: context.colors.mainColor,
-              onPrimary: Colors.white,
-
-              secondary: context.colors.mainColor,
-              onSecondary: Colors.white,
-
-              error: Colors.red,
-              onError: Colors.white,
-
-              surface: context.colors.background,
-              onSurface: context.colors.mainText,
-            ),
-            dialogTheme: DialogThemeData(
-              backgroundColor: context.colors.background,
-            ),
-          ),
-          child: child!,
-        );
-      },
-    );
-
-    if (picked == null) return;
-
-    setState(() {
-      selectedDate = picked;
-
-      isDateValid = true;
-
-      formatedDate = picked.formatedToDayAndMon();
-    });
-  }
-
-  Future<void> onChooseTime() async {
-    final picked = await showTimePicker(
-      context: context,
-      initialTime: selectedTime ?? TimeOfDay.now(),
-      builder: (context, child) {
-        final isDark = Theme.of(context).brightness == Brightness.dark;
-
-        return Theme(
-          data: Theme.of(context).copyWith(
-            colorScheme: ColorScheme(
-              brightness: isDark ? Brightness.dark : Brightness.light,
-
-              primary: context.colors.mainColor,
-              onPrimary: Colors.white,
-
-              secondary: context.colors.mainColor,
-              onSecondary: Colors.white,
-
-              error: Colors.red,
-              onError: Colors.white,
-
-              surface: context.colors.background,
-              onSurface: context.colors.mainText,
-            ),
-            dialogTheme: DialogThemeData(
-              backgroundColor: context.colors.background,
-            ),
-          ),
-          child: child!,
-        );
-      },
-    );
-
-    if (picked == null) return;
-
-    setState(() {
-      selectedTime = picked;
-      formattedTime = picked.format(context);
-      isTimeValid = true;
-    });
   }
 
   @override

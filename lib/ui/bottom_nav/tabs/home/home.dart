@@ -1,4 +1,5 @@
 import 'package:evently/l10n/app_localizations.dart';
+import 'package:evently/model/event.dart';
 import 'package:evently/provider/categories_provider.dart';
 import 'package:evently/provider/events_provider.dart';
 import 'package:evently/provider/user_provider.dart';
@@ -114,6 +115,7 @@ class _HomeState extends State {
                           );
                         }
                       },
+                      onTap: onEventTab(events[index]),
                     ),
                   ),
                 );
@@ -122,6 +124,12 @@ class _HomeState extends State {
         ],
       ),
     );
+  }
+
+  void Function()? onEventTab(Event event) {
+    return () {
+      Navigator.pushNamed(context, AppRoutes.eventDetails, arguments: event);
+    };
   }
 }
 

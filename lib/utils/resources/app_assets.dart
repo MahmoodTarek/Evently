@@ -38,6 +38,7 @@ abstract class AppIcons {
   static const icSearch = 'assets/icons/ic_search.svg';
   static const icDate = 'assets/icons/ic_date.svg';
   static const icTime = 'assets/icons/ic_time.svg';
+  static const icEdit = 'assets/icons/ic_edit.svg';
 }
 
 abstract class AppImages {
