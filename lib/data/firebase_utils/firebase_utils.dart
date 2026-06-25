@@ -28,6 +28,9 @@ class FirebaseUtils {
     });
   }
 
+  static Future<void> updateUserInFirebase({required User user}) {
+    return getUsersCollection().doc(user.id).update(user.toFirestore());
+  }
   static CollectionReference<Event> getEventsCollection({required String uId}) {
     return getUsersCollection().doc(uId)
         .collection(Event.collectionName)
@@ -44,5 +47,11 @@ class FirebaseUtils {
         .doc(); // Create a new document with an auto-generated ID
     event.id = docRef.id; // Set the ID of the event
     return docRef.set(event); // Add the event to the Firestore collection
+  }
+
+  static Future<void> updateEvent({required Event event, required String uId}) {
+    final collectionRef = getEventsCollection(uId: uId);
+    var docRef = collectionRef.doc(event.id);
+    return docRef.update(event.toFirestore());
   }
 }

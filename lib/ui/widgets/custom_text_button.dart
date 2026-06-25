@@ -5,6 +5,7 @@ class CustomTextButton extends StatelessWidget {
   final VoidCallback? onPressed;
   final TextStyle? textStyle;
   final bool isUnderline;
+  final Color? underlineColor;
 
   const CustomTextButton({
     super.key,
@@ -12,6 +13,7 @@ class CustomTextButton extends StatelessWidget {
     this.onPressed,
     this.textStyle,
     this.isUnderline = true,
+    this.underlineColor,
   });
 
   @override
@@ -29,6 +31,7 @@ class CustomTextButton extends StatelessWidget {
         style:
             textStyle?.copyWith(
               decoration: isUnderline ? TextDecoration.underline : null,
+              decorationColor: underlineColor,
             ) ??
             TextStyle(
               color: Colors.grey,

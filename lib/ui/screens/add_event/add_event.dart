@@ -277,8 +277,6 @@ class _AddEventState extends State<AddEvent> {
                       if (selectedDate == null || selectedTime == null) {
                         return;
                       }
-
-                      print('desc$description');
                       onAddEventButtonClicked(
                         title: title,
                         description: description,

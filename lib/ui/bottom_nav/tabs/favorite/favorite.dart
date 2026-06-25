@@ -110,7 +110,7 @@ class _FavoriteState extends State<Favorite> {
                       uId: userProvider.currentUser!.id,
                     );
                   },
-                    onTap: onEventTab(events[index])
+                  onTap: onEventTab(events[index].id),
                 ),
               ),
             ),
@@ -120,9 +120,9 @@ class _FavoriteState extends State<Favorite> {
     );
   }
 
-  void Function()? onEventTab(Event event) {
+  void Function()? onEventTab(String eventId) {
     return () {
-      Navigator.pushNamed(context, AppRoutes.eventDetails, arguments: event);
+      Navigator.pushNamed(context, AppRoutes.eventDetails, arguments: eventId);
     };
   }
 }

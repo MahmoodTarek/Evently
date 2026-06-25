@@ -1,15 +1,18 @@
 import 'package:evently/l10n/app_localizations.dart';
-import 'package:evently/model/event.dart';
+import 'package:evently/provider/events_provider.dart';
+import 'package:evently/provider/user_provider.dart';
 import 'package:evently/ui/bottom_nav/tabs/home/widgets/event_card.dart';
 import 'package:evently/ui/widgets/custom_app_bar.dart';
 import 'package:evently/ui/widgets/custom_item_card.dart';
 import 'package:evently/utils/app_theme_extension.dart';
+import 'package:evently/utils/formated_extension.dart';
 import 'package:evently/utils/resources/app_assets.dart';
 import 'package:evently/utils/resources/app_routes.dart';
 import 'package:evently/utils/resources/app_styles.dart';
 import 'package:evently/utils/screen_size.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:provider/provider.dart';
 
 class EventDetails extends StatelessWidget {
   const EventDetails({super.key});
@@ -19,18 +22,19 @@ class EventDetails extends StatelessWidget {
     final localization = AppLocalizations.of(context)!;
     final height = context.height;
     final width = context.width;
-    final currentEvent = ModalRoute
-        .of(context)!
-        .settings
-        .arguments as Event;
+    var currentEventId = ModalRoute.of(context)!.settings.arguments as String;
+    final eventsProvider = Provider.of<EventsProvider>(context);
+    final userID = Provider.of<UserProvider>(context).currentUser!.id;
+    var currentEvent = eventsProvider.getEventById(currentEventId);
+    final eventDateFormat = currentEvent.date.formatedToDayAndMon();
     final categoryImage = eventCategoryImage(currentEvent.category, context);
-
 
     return Scaffold(
       appBar: CustomAppBar(
         title: localization.event_details_title,
         centerTitle: true,
         leading: IconButton(
+          highlightColor: Colors.transparent,
           onPressed: () => Navigator.pop(context),
           icon: SvgPicture.asset(
             context.isDark ? AppIcons.icBackDark : AppIcons.icBackLight,
@@ -38,14 +42,25 @@ class EventDetails extends StatelessWidget {
         ),
         actions: [
           IconButton(
-            onPressed: () {
-              Navigator.pushNamed(
-                  context, AppRoutes.editEvent, arguments: currentEvent);
+            highlightColor: Colors.transparent,
+            onPressed: () async {
+              var updated = await Navigator.pushNamed(
+                context,
+                AppRoutes.editEvent,
+                arguments: currentEvent,
+              );
+              if (updated == true) {
+                await eventsProvider.getEvents(uId: userID);
+                currentEvent = eventsProvider.events.firstWhere(
+                  (event) => event.id == currentEvent.id,
+                );
+              }
             },
             iconSize: height * 0.04,
+            padding: EdgeInsets.symmetric(horizontal: 12),
             icon: CustomItemCard(
-              height: height * 0.04,
-              width: width * 0.08,
+              height: height * 0.05,
+              width: width * 0.12,
               borderRadius: 10,
               backgroundColor: context.colors.inputs,
               child: SvgPicture.asset(
@@ -57,7 +72,6 @@ class EventDetails extends StatelessWidget {
               ),
             ),
           ),
-
         ],
       ),
 
@@ -88,7 +102,6 @@ class EventDetails extends StatelessWidget {
                 ).copyWith(color: context.colors.mainText),
               ),
 
-              /*Todo: Add Event Title*/
               SizedBox(height: height * 0.02),
 
               CustomItemCard(
@@ -126,13 +139,13 @@ class EventDetails extends StatelessWidget {
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
                         Text(
-                          '21 January',
+                          eventDateFormat,
                           style: AppStyles.medium16(
                             context: context,
                           ).copyWith(color: context.colors.mainColor),
-                        ) /*Todo: Add Date*/,
+                        ),
                         Text(
-                          '12:12 AM',
+                          currentEvent.time,
                           style: AppStyles.medium16(
                             context: context,
                           ).copyWith(color: context.colors.mainText),
