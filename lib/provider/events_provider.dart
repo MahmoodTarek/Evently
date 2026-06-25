@@ -87,4 +87,11 @@ class EventsProvider extends ChangeNotifier {
   Event getEventById(String eventId) {
     return events.firstWhere((event) => event.id == eventId);
   }
+
+  void clearEvents() {
+    events.clear();
+    favoriteEvents.clear();
+    searchResults.clear();
+    notifyListeners();
+  }
 }

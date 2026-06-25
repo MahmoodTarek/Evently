@@ -31,13 +31,14 @@ class FirebaseUtils {
   static Future<void> updateUserInFirebase({required User user}) {
     return getUsersCollection().doc(user.id).update(user.toFirestore());
   }
+
   static CollectionReference<Event> getEventsCollection({required String uId}) {
     return getUsersCollection().doc(uId)
         .collection(Event.collectionName)
         .withConverter<Event>(
-          fromFirestore: (snapshot, _) => Event.fromFirestore(snapshot.data()!),
-          toFirestore: (event, _) => event.toFirestore(),
-        );
+      fromFirestore: (snapshot, _) => Event.fromFirestore(snapshot.data()!),
+      toFirestore: (event, _) => event.toFirestore(),
+    );
   }
 
   static Future<void> addEvent({required Event event, required String uId}) {
