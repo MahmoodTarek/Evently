@@ -1,5 +1,6 @@
 import 'dart:io';
 
+import 'package:evently/data/firebase_utils/firebase_utils.dart';
 import 'package:evently/l10n/app_localizations.dart';
 import 'package:evently/provider/user_provider.dart';
 import 'package:evently/ui/bottom_nav/tabs/profile/pick_image.dart';
@@ -26,17 +27,33 @@ class Profile extends StatefulWidget {
 class _ProfileState extends State<Profile> {
   File? imageFile;
 
-  Future<void> handlePickImage() async {
+
+  Future<void> handlePickImage(UserProvider userProvider) async {
     final file = await pickImage();
     if (file == null) return;
+
     setState(() {
       imageFile = file;
     });
+
+    final updatedUser = userProvider.currentUser!.copyWith(
+      image: file.path,
+    );
+
+    userProvider.setCurrentUser(user: updatedUser);
+
+    await FirebaseUtils.updateUserInFirebase(
+      user: updatedUser,
+    );
   }
+
 
   @override
   Widget build(BuildContext context) {
     final userProvider = Provider.of<UserProvider>(context);
+    imageFile = userProvider.currentUser!.image == null
+        ? null
+        : File(userProvider.currentUser!.image!);
     String icLanguagePath = context.isDark
         ? AppIcons.icRightArrowDark
         : AppIcons.icRightArrow;
@@ -53,7 +70,9 @@ class _ProfileState extends State<Profile> {
             InkWell(
               highlightColor: Colors.transparent,
               splashFactory: NoSplash.splashFactory,
-              onTap: handlePickImage,
+              onTap: () {
+                handlePickImage(userProvider);
+              },
               child: CirclePicture(
                 imagePath: icProfilePacPlaceHolder,
                 imageFile: imageFile,
@@ -106,7 +125,7 @@ class _ProfileState extends State<Profile> {
               title: AppLocalizations.of(context)!.profile_logout,
               actionIcon: InkWell(
                 onTap: () {
-                  userProvider.currentUser = null;
+                  userProvider.logout();
                   Navigator.pushReplacementNamed(context, AppRoutes.login);
                 },
                 child: DirectionalIcon(

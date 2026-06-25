@@ -40,6 +40,7 @@ class EventDate extends StatelessWidget {
           text: clickableText,
           onPressed: onIconTap,
           textStyle: clickableTextStyle,
+          underlineColor: underlineColor,
         ),
       ],
     );
