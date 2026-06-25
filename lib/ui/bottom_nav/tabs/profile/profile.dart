@@ -1,5 +1,6 @@
 import 'dart:io';
 
+import 'package:evently/data/cloudinary.dart';
 import 'package:evently/data/firebase_utils/firebase_utils.dart';
 import 'package:evently/l10n/app_localizations.dart';
 import 'package:evently/provider/user_provider.dart';
@@ -27,7 +28,6 @@ class Profile extends StatefulWidget {
 class _ProfileState extends State<Profile> {
   File? imageFile;
 
-
   Future<void> handlePickImage(UserProvider userProvider) async {
     final file = await pickImage();
     if (file == null) return;
@@ -36,24 +36,20 @@ class _ProfileState extends State<Profile> {
       imageFile = file;
     });
 
-    final updatedUser = userProvider.currentUser!.copyWith(
-      image: file.path,
-    );
+    final imageUrl = await Cloudinary.uploadProfileImage(imageFile: file);
+
+    final updatedUser = userProvider.currentUser!.copyWith(image: imageUrl);
 
     userProvider.setCurrentUser(user: updatedUser);
 
-    await FirebaseUtils.updateUserInFirebase(
-      user: updatedUser,
-    );
+    await FirebaseUtils.updateUserInFirebase(user: updatedUser);
   }
-
 
   @override
   Widget build(BuildContext context) {
     final userProvider = Provider.of<UserProvider>(context);
-    imageFile = userProvider.currentUser!.image == null
-        ? null
-        : File(userProvider.currentUser!.image!);
+
+    final imageUrl = userProvider.currentUser?.image;
     String icLanguagePath = context.isDark
         ? AppIcons.icRightArrowDark
         : AppIcons.icRightArrow;
@@ -74,7 +70,7 @@ class _ProfileState extends State<Profile> {
                 handlePickImage(userProvider);
               },
               child: CirclePicture(
-                imagePath: icProfilePacPlaceHolder,
+                imagePath: imageUrl ?? icProfilePacPlaceHolder,
                 imageFile: imageFile,
               ),
             ),
@@ -82,14 +78,14 @@ class _ProfileState extends State<Profile> {
             const SizedBox(height: 16),
 
             Text(
-              userProvider.currentUser!.name,
+              userProvider.currentUser?.name ?? '',
               style: AppStyles.semiBold20().copyWith(
                 color: context.colors.mainText,
               ),
             ),
 
             Text(
-              userProvider.currentUser!.email,
+              userProvider.currentUser?.email ?? "",
               style: AppStyles.regular14(
                 context: context,
               ).copyWith(color: context.colors.secText),
@@ -125,7 +121,7 @@ class _ProfileState extends State<Profile> {
               title: AppLocalizations.of(context)!.profile_logout,
               actionIcon: InkWell(
                 onTap: () {
-                  userProvider.logout();
+                  userProvider.logout(context: context);
                   Navigator.pushReplacementNamed(context, AppRoutes.login);
                 },
                 child: DirectionalIcon(

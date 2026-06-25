@@ -29,7 +29,9 @@ class CirclePicture extends StatelessWidget {
       clipBehavior: Clip.antiAlias,
       child: imageFile != null
           ? Image.file(imageFile!, fit: BoxFit.cover)
-          : Image.asset(imagePath, fit: BoxFit.none),
+          : imagePath.startsWith('http')
+          ? Image.network(imagePath, fit: BoxFit.cover)
+          : Image.asset(imagePath, fit: BoxFit.cover),
     );
   }
 }
