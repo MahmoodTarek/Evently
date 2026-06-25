@@ -6,14 +6,31 @@ class AppPickers {
     required BuildContext context,
     required DateTime? selectedDate,
   }) {
+    final now = DateTime.now();
+
+    final firstDate = DateTime(
+      now.year,
+      now.month,
+      now.day,
+    );
+
+    final initialDate =
+    selectedDate != null && selectedDate.isBefore(firstDate)
+        ? firstDate
+        : selectedDate ?? firstDate;
+
     return showDatePicker(
       context: context,
-      locale: Locale(Localizations
-          .localeOf(context)
-          .languageCode),
-      initialDate: selectedDate ?? DateTime.now(),
-      firstDate: DateTime.now(),
-      lastDate: DateTime.now().add(const Duration(days: 365)),
+      locale: Locale(
+        Localizations
+            .localeOf(context)
+            .languageCode,
+      ),
+      initialDate: initialDate,
+      firstDate: firstDate,
+      lastDate: firstDate.add(
+        const Duration(days: 365),
+      ),
       builder: (context, child) {
         return pickersTheme(
           context: context,
@@ -22,6 +39,7 @@ class AppPickers {
       },
     );
   }
+
 
   static Future<TimeOfDay?> onChooseTime({
     required BuildContext context,
