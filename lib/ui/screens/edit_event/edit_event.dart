@@ -1,7 +1,9 @@
+import 'package:evently/data/firebase_utils/firebase_utils.dart';
 import 'package:evently/l10n/app_localizations.dart';
 import 'package:evently/model/category.dart';
 import 'package:evently/model/event.dart';
 import 'package:evently/provider/categories_provider.dart';
+import 'package:evently/provider/user_provider.dart';
 import 'package:evently/ui/bottom_nav/tabs/home/widgets/event_card.dart';
 import 'package:evently/ui/screens/add_event/widgets/event_date.dart';
 import 'package:evently/ui/screens/on_boarding/widgets/custom_form_field.dart';
@@ -17,6 +19,7 @@ import 'package:evently/utils/resources/app_validator.dart';
 import 'package:evently/utils/screen_size.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:provider/provider.dart';
 
 class EditEvent extends StatefulWidget {
   const EditEvent({super.key});
@@ -29,8 +32,7 @@ class _EditEventState extends State<EditEvent> {
   final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
 
   final TextEditingController _titleController = TextEditingController();
-  final TextEditingController _descriptionController =
-  TextEditingController();
+  final TextEditingController _descriptionController = TextEditingController();
 
   Event? currentEvent;
 
@@ -51,11 +53,7 @@ class _EditEventState extends State<EditEvent> {
   void initializeData() {
     if (isInitialized) return;
 
-    currentEvent =
-    ModalRoute
-        .of(context)!
-        .settings
-        .arguments as Event;
+    currentEvent = ModalRoute.of(context)!.settings.arguments as Event;
 
     _titleController.text = currentEvent!.title;
     _descriptionController.text = currentEvent!.description;
@@ -63,8 +61,7 @@ class _EditEventState extends State<EditEvent> {
     selectedDate = currentEvent!.date;
     selectedCategory = currentEvent!.category;
     selectedTime = currentEvent!.time;
-    selectedCategoryImage =
-        eventCategoryImage(currentEvent!.category, context);
+    selectedCategoryImage = eventCategoryImage(currentEvent!.category, context);
 
     isInitialized = true;
   }
@@ -86,9 +83,7 @@ class _EditEventState extends State<EditEvent> {
         leading: IconButton(
           onPressed: () => Navigator.pop(context),
           icon: SvgPicture.asset(
-            context.isDark
-                ? AppIcons.icBackDark
-                : AppIcons.icBackLight,
+            context.isDark ? AppIcons.icBackDark : AppIcons.icBackLight,
           ),
         ),
       ),
@@ -117,16 +112,13 @@ class _EditEventState extends State<EditEvent> {
 
                 CustomSelectedItemsRow(
                   initialValue: selectedCategory!,
-                  optionsTitle:
-                  categories.map((e) => e.name).toList(),
-                  optionsIcon:
-                  categories.map((e) => e.image).toList(),
+                  optionsTitle: categories.map((e) => e.name).toList(),
+                  optionsIcon: categories.map((e) => e.image).toList(),
                   labelBuilder: (String item) => item,
                   onSelected: (String item) {
                     setState(() {
                       selectedCategory = item;
-                      selectedCategoryImage =
-                          eventCategoryImage(item, context);
+                      selectedCategoryImage = eventCategoryImage(item, context);
                     });
                   },
                 ),
@@ -136,9 +128,7 @@ class _EditEventState extends State<EditEvent> {
                 paddingOrientational(
                   child: Text(
                     localization.event_title_label,
-                    style: AppStyles.medium16(
-                      context: context,
-                    ),
+                    style: AppStyles.medium16(context: context),
                   ),
                 ),
 
@@ -153,13 +143,10 @@ class _EditEventState extends State<EditEvent> {
                         value: value,
                       );
                     },
-                    hintText:
-                    localization.event_title_hint,
+                    hintText: localization.event_title_hint,
                     hintStyle: AppStyles.regular14(
                       context: context,
-                    ).copyWith(
-                      color: context.colors.secText,
-                    ),
+                    ).copyWith(color: context.colors.secText),
                   ),
                 ),
 
@@ -168,9 +155,7 @@ class _EditEventState extends State<EditEvent> {
                 paddingOrientational(
                   child: Text(
                     localization.event_description_label,
-                    style: AppStyles.medium16(
-                      context: context,
-                    ),
+                    style: AppStyles.medium16(context: context),
                   ),
                 ),
 
@@ -179,13 +164,10 @@ class _EditEventState extends State<EditEvent> {
                 paddingOrientational(
                   child: CustomFormField(
                     controller: _descriptionController,
-                    hintText:
-                    localization.event_description_label,
+                    hintText: localization.event_description_label,
                     hintStyle: AppStyles.regular14(
                       context: context,
-                    ).copyWith(
-                      color: context.colors.secText,
-                    ),
+                    ).copyWith(color: context.colors.secText),
                     maxLines: 5,
                   ),
                 ),
@@ -194,17 +176,14 @@ class _EditEventState extends State<EditEvent> {
 
                 paddingOrientational(
                   child: EventDate(
+                    underlineColor: context.colors.mainColor,
+
                     prefixIcon: AppIcons.icDate,
                     title: localization.event_date_label,
-                    clickableText:
-                    selectedDate!.formatedToDayAndMon(),
-                    clickableTextStyle:
-                    AppStyles.regular14(
-                      context: context,
-                    ),
+                    clickableText: selectedDate!.formatedToDayAndMon(),
+                    clickableTextStyle: AppStyles.regular14(context: context),
                     onIconTap: () async {
-                      final pickedDate =
-                      await AppPickers.onChooseDate(
+                      final pickedDate = await AppPickers.onChooseDate(
                         context: context,
                         selectedDate: selectedDate,
                       );
@@ -221,14 +200,25 @@ class _EditEventState extends State<EditEvent> {
                 paddingOrientational(
                   vertical: height * .02,
                   child: EventDate(
+                    underlineColor: context.colors.mainColor,
+                    onIconTap: () async {
+                      final picked = await AppPickers.onChooseTime(
+                        context: context,
+                        selectedTime: null,
+                      );
+
+                      if (picked == null) return;
+
+                      setState(() {
+                        selectedTime =
+                            "${picked.hour} : ${picked.minute}  ${picked.period.name.toUpperCase()}";
+                      });
+                    },
+
                     prefixIcon: AppIcons.icTime,
-                    title:
-                    localization.event_time_label,
+                    title: localization.event_time_label,
                     clickableText: selectedTime!,
-                    clickableTextStyle:
-                    AppStyles.regular14(
-                      context: context,
-                    ),
+                    clickableTextStyle: AppStyles.regular14(context: context),
                   ),
                 ),
 
@@ -236,22 +226,37 @@ class _EditEventState extends State<EditEvent> {
 
                 paddingOrientational(
                   child: CustomElevatedButton(
-                    onPressed: () {
-                      if (_formKey.currentState!
-                          .validate()) {
-                        // TODO: Update Event
+                    onPressed: () async {
+                      if (!_formKey.currentState!.validate()) return;
+
+                      final userID = Provider.of<UserProvider>(
+                        context,
+                        listen: false,
+                      ).currentUser!.id;
+
+                      try {
+                        await onAddEventButtonClicked(
+                          uId: userID,
+                          title: _titleController.text.trim(),
+                          description: _descriptionController.text.trim(),
+                          selectedDate: selectedDate!,
+                          selectedTime: selectedTime!,
+                          selectedCategory: selectedCategory!,
+                        );
+
+                        if (!mounted) return;
+
+                        Navigator.pop(context, true);
+                      } catch (e) {
+                        if (!mounted) return;
                       }
                     },
-                    backgroundColor:
-                    context.colors.mainColor,
+                    backgroundColor: context.colors.mainColor,
                     child: Text(
-                      localization
-                          .event_update_button,
+                      localization.event_update_button,
                       style: AppStyles.medium20(
                         context: context,
-                      ).copyWith(
-                        color: Colors.white,
-                      ),
+                      ).copyWith(color: Colors.white),
                     ),
                   ),
                 ),
@@ -263,16 +268,37 @@ class _EditEventState extends State<EditEvent> {
     );
   }
 
+  Future<void> onAddEventButtonClicked({
+    required String uId,
+    required String title,
+    required String description,
+    required DateTime selectedDate,
+    required String selectedTime,
+    required String selectedCategory,
+  }) async {
+    if (!_formKey.currentState!.validate()) return;
+
+    final event = Event(
+      id: currentEvent!.id,
+      title: title,
+      description: description,
+      date: selectedDate,
+      time: selectedTime,
+      category: selectedCategory,
+      imageUrl: selectedCategoryImage!,
+      isFavorite: currentEvent!.isFavorite,
+    );
+
+    await FirebaseUtils.updateEvent(event: event, uId: uId);
+  }
+
   Widget paddingOrientational({
     required Widget child,
     double horizontal = 16,
     double vertical = 0,
   }) {
     return Padding(
-      padding: EdgeInsets.symmetric(
-        horizontal: horizontal,
-        vertical: vertical,
-      ),
+      padding: EdgeInsets.symmetric(horizontal: horizontal, vertical: vertical),
       child: child,
     );
   }
